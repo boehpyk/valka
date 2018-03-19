@@ -1,0 +1,89 @@
+<table class="subdeps table">
+    <tr>
+        {% if is_endpoint == true %}
+            <th class="dep_title col-lg-8 col-md-8 col-sm-8 col-xs-8">Название</th>
+        {% else %}
+            <th class="dep_title col-lg-9 col-md-9 col-sm-9 col-xs-9">Название</th>
+        {% endif %}
+            <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1" title="Публиковать"><span class="glyphicon glyphicon-ok publish-th"></span></th>
+            <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1" title="В меню"><span class="glyphicon glyphicon-list menu-th"></span></th>
+        {% if is_endpoint == true %}
+            <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1" title="Главный"><span class="glyphicon glyphicon glyphicon-home main-th"></span></th>
+        {% endif %}
+            <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1" title="Удалить"><span class="glyphicon glyphicon-remove delete-th"></span></th>
+    </tr>
+</table>
+<ul id="draggablePanelList" class="list-unstyled" data-type="Page">
+    {% for subdep in subdeps %}
+        <li class="panel panel-info" id="{{ subdep.id }}">
+            <div class="panel-heading"><span glyphicon glyphicon-move></span></div>
+            <table class="subdeps table">
+                <tr>
+                    <td class="dep_title col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                        <a href="{% if global.debug %}/index_dev.php{% endif %}/admin/article/{{ subdep.id }}/">{{ subdep.title }}</a>
+                    </td>
+                    <td class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                        <input
+                                type="checkbox"
+                                value="yes"
+                                class="subdep-manage"
+                                name="sub_publish[{{ subdep.id }}]"
+                                data-role="publish"
+                                {% if subdep.publish == 'yes' %}checked{% endif %}
+                        />
+                    </td>
+                    <td class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                        <input
+                                type="checkbox"
+                                value="yes"
+                                class="subdep-manage"
+                                name="sub_menu[{{ subdep.id }}]"
+                                data-role="menu"
+                                {% if subdep.menu == 'yes' %}checked{% endif %}
+                        />
+                    </td>
+                    {% if is_endpoint == true %}
+                        <td class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                            <input
+                                    type="radio"
+                                    value="{{ subdep.id }}"
+                                    class="subdep-manage"
+                                    name="sub_main"
+                                    data-role="main"
+                                    {% if subdep.main == 'yes' %}checked{% endif %}
+                            />
+                        </td>
+                    {% endif %}
+                    <td class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                        <input
+                                type="checkbox"
+                                value="1"
+                                name="delete[{{ subdep.id }}]"
+                                class="subdep-manage"
+                                data-role="delete"
+                        >
+                    </td>
+                </tr>
+            </table>
+        </li>
+        <input type="hidden" name="exists[]" value="{{ subdep.id }}">
+    {% endfor %}
+</ul>
+<!-- _BEGIN bottom_checkboxes -->
+<table class="subdeps table">
+    <tr>
+        {% if is_endpoint == true %}
+        <th class="dep_title col-lg-8 col-md-8 col-sm-8 col-xs-8">&nbsp;</th>
+        {% else %}
+        <td class="dep_title col-lg-9 col-md-9 col-sm-9 col-xs-9">&nbsp;</td>
+        {% endif %}
+        <td class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><input type="checkbox" class="select-all" data-target="publish" /></td>
+        <td class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><input type="checkbox" class="select-all" data-target="menu" /></td>
+        {% if is_endpoint == true %}
+            <td class="col-lg-1 col-md-1 col-sm-1 col-xs-1">&nbsp;</td>
+        {% endif %}
+        <td class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><input type="checkbox" class="select-all" data-target="delete" /></td>
+    </tr>
+</table>
+<!-- END bottom_checkboxes -->
+<input type="hidden" name="sortdata" id="sortdata" value="" />

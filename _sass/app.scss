@@ -1,0 +1,17 @@
+@import './variables';
+
+@import './bootstrap/scss/bootstrap-reboot';
+@import './bootstrap/scss/bootstrap-grid';
+@import './utils/default-skin';
+
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab:400,700|Roboto:400,700&subset=cyrillic-ext');
+@import './globals';
+
+@import './layouts/header';
+@import './core/header-carousel';
+@import './core/services';
+@import './core/photo';
+@import './core/reviews';
+@import './core/form';
+@import './core/work';
+@import './layouts/footer';

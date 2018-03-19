@@ -1,0 +1,92 @@
+.work {
+  background-color: $color-white;
+
+  &__flex {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 301px;
+
+    @include media-breakpoint-down(lg) {
+      width: 160px;
+    }
+    @include media-breakpoint-down(sm) {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+  }
+
+  &__image {
+    margin-left: -10px;
+    margin-bottom: 58px;
+    color: $color-brown;
+
+    @include media-breakpoint-down(sm) {
+      margin-bottom: 10px;
+    }
+
+    &_phone {
+      margin-left: -28px;
+    }
+
+    &_man {
+      margin-top: -17px;
+
+      @include media-breakpoint-down(sm) {
+        margin-top: 0;
+      }
+    }
+  }
+
+  &__line {
+    position: absolute;
+    top: 80px;
+    left: 150px;
+    width: calc(100% - 300px);
+    height: 2px;
+    background-color: $color-brown;
+
+    @include media-breakpoint-down(lg) {
+      left: 75px;
+      width: calc(100% - 150px);
+    }
+    @include media-breakpoint-down(sm) {
+      display: none;
+    }
+  }
+
+  &__txt {
+    position: relative;
+    display: block;
+    text-align: center;
+    color: $color-black;
+    font: $roboto-bold-30;
+
+    @include media-breakpoint-down(lg) {
+      font: $roboto-bold-21;
+    }
+
+    &:before {
+      position: absolute;
+      top: -44px;
+      left: calc(50% - 17px);
+      width: 22px;
+      height: 22px;
+      content: '';
+      border-radius: 50%;
+      background: $color-brown;
+
+      @include media-breakpoint-down(sm) {
+        display: none;
+      }
+    }
+  }
+}

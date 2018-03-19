@@ -1,0 +1,92 @@
+
+<h1>Раздел &laquo;{{ article.title }}&raquo;. Фотогалерея</h1>
+
+<ul class="nav nav-tabs" role="tablist"><ul class="nav nav-tabs" role="tablist">
+        <li role="presentation"><a href="/{% if app.debug == true %}index_dev.php/{% endif %}admin/article/{{ article.id }}/">Текст и общие параметры</a></li>
+        <li role="presentation" class="active"><a href="/{% if app.debug == true %}index_dev.php/{% endif %}admin/gallery/{{ article.id }}/">Фотогалерея</a></li>
+        <li role="presentation"><a href="/{% if app.debug == true %}index_dev.php/{% endif %}admin/rightcol/{{ article.id }}/">Правая колонка</a></li>
+    </ul>
+    <form enctype="multipart/form-data" method="post" name="mainForm" id="mainForm">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">Список фотографий</div>
+            <div class="panel-body">
+
+                <table class="subdeps table">
+                    <tr>
+                        <th class="col-lg-2 col-md-2 col-sm-2 col-xs-2">&nbsp;</th>
+                        <th class="col-lg-8 col-md-8 col-sm-8 col-xs-8">Название</th>
+                        <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1" title="Публиковать"><span class="glyphicon glyphicon-ok publish-th"></span></th>
+                        <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1" title="Удалить"><span class="glyphicon glyphicon-remove delete-th"></span></th>
+                    </tr>
+                </table>
+
+                <ul id="draggablePanelList" class="list-unstyled" data-type='photos'>
+                    {% for photo in photos %}
+                    <li class="panel panel-info" id="{{ photo.id }}">
+                        <div class="panel-heading"><span glyphicon glyphicon-move></span></div>
+                        <table class="subdeps table">
+                            <tr>
+                                <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2"><a href="/uplds/{{ article.id }}/gallery/{{ photo.filename }}" border="0" class="thickbox" rel="gallery"><img src="/uplds/{{ article.id }}/gallery/{{ photo.preview }}" border="0" width="100" height="80"></a></td>
+                                <td class="col-lg-8 col-md-8 col-sm-8 col-xs-8"><input type="text" name='p_title[{{ photo.id }}]' id='p_title[{{ photo.id }}]' value='{{ photo.title }}' class="form-control" /></td>
+                                <td class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><input {{ photo.publish_checked }} value="yes" name="sub_publish[{{ photo.id }}]" type="checkbox" class="subdep-manage" data-role="publish" /></td>
+                                <td class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><input value="yes" name="delete[{{ photo.id }}]" type="checkbox" class="subdep-manage" data-role="delete" /></td>
+                            </tr>
+                        </table>
+                    </li>
+                    <input type="hidden" name="exists[{{ photo.id }}]" value="yes">
+                    {% endfor %}
+                </ul>
+                <table class="photos-list table">
+                    <tr>
+                        <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2">&nbsp;</td>
+                        <td class="col-lg-8 col-md-8 col-sm-8 col-xs-8">&nbsp;</td>
+                        <td class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><input type="checkbox" class="select-all" data-target="publish" /></td>
+                        <td class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><input type="checkbox" class="select-all" data-target="delete" /></td>
+                    </tr>
+                </table>
+
+                <input type="hidden" name="sortdata" id="sortdata" value="" />
+
+                {#{% if photo.length > limit %}#}
+
+            </div>
+        </div>
+
+        <input type="hidden" name="article_id" id='article_id' value="{{ article.id }}">
+        <input type="hidden" name="parent_id" id='parent_id' value="{{ article.parent_id }}">
+
+
+        <!-- <input value="Внести изменения" name="Update" type="submit" class="but_main" onClick="return ConfirmDelete()"> -->
+        <button class="btn btn-primary" id="submit_btn" onClick="return ConfirmDelete()">Внести изменения</button>
+        <input type="hidden" name="Update" id='Update' value="Сохранить">
+
+    </form>
+
+    <br /><br />
+
+    <form enctype="multipart/form-data" method="post">
+        <div class="panel panel-default">
+            <div class="panel-heading blue">Добавить фотографии</div>
+            <div class="panel-body">
+                <table class="photos-add table">
+                    <tr>
+                        <th class="col-lg-3 col-md-3 col-sm-3 col-xs-3">Выбрать файл</td>
+                    </tr>
+                    <tr>
+                        <td width="300">
+                            <input type="file" name='photo[]' class="multi form-control" accept="gif|jpg|png|jpeg" multiple style="width:90%" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tfoot" colspan="3"><input value="добавить" class="btn btn-primary" name="addPhoto" type="submit"></td>
+                    </tr>
+                </table>
+                <input type="hidden" name="parent_id" value="{{ article.id }}">
+                <input type="hidden" name="article_id" value="{{ article.id }}">
+
+            </div>
+        </div>
+
+    </form>
+

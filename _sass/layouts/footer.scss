@@ -1,0 +1,47 @@
+.footer {
+    height: 326px;
+    background-color: $color-black;
+    .container {
+        padding-top: 30px;
+    }
+    &__rights {
+        @include media-breakpoint-down(md) {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+    &__logo {
+        width: 139px;
+        height: 139px;
+        color: $color-orange;
+        @include media-breakpoint-down(md) {
+            margin-bottom: 25px;
+        }
+    }
+    &__txt {
+        display: block;
+        color: $color-orange;
+        font: $roboto-slab-regular-14;
+        line-height: 25px;
+        @include media-breakpoint-down(md) {
+            text-align: center;
+        }
+    }
+    &__txt_bold {
+        font: $roboto-slab-bold-18;
+    }
+    &__menu {
+        padding: 0;
+        list-style-type: none;
+        font: $roboto-slab-bold-24;
+        line-height: 36px;
+        a {
+            text-decoration: none;
+            color: $color-orange;
+        }
+        @include media-breakpoint-down(md) {
+            display: none;
+        }
+    }
+}

@@ -1,0 +1,123 @@
+.header-carousel {
+  &__label {
+    position: absolute;
+    top: 12px;
+    right: 0;
+
+    @include media-breakpoint-down(md) {
+      width: 85px;
+    }
+  }
+
+  &__logo {
+    color: $color-black;
+    opacity: .9;
+
+    @include media-breakpoint-down(lg) {
+      display: none;
+    }
+  }
+}
+
+
+.header-slide {
+  overflow: hidden;
+  width: 100vw;
+  height: 346px;
+  user-select: none;
+  pointer-events: none;
+  background: url('/assets/pctrs/tree-bg.jpg') center -90px/100% auto repeat $color-brown-light;
+
+  &_2 {
+    background: url('/assets/pctrs/blue-bg.jpg') center/auto 100% no-repeat $color-blue;
+  }
+
+  &_3 {
+    position: relative;
+    background: url('/assets/pctrs/brown-bg.jpg') 25% top/auto 100% no-repeat;
+
+    @include media-breakpoint-down(lg) {
+      background-position-x: left;
+    }
+
+    &:before {
+      position: absolute;
+      z-index: -1;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      content: '';
+      background: radial-gradient(circle farthest-corner at 25% 50%, $color-beige-dark, $color-brown-light);
+    }
+  }
+
+  &__flex-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 346px;
+
+    @include media-breakpoint-up(xl) {
+      justify-content: space-between;
+      padding-right: 150px;
+      padding-left: 50px;
+    }
+  }
+
+  &__title {
+    color: $color-brown-bright;
+    font: $roboto-slab-bold-58;
+
+    @include media-breakpoint-down(sm) {
+      font: $roboto-slab-bold-34;
+    }
+    mix-blend-mode: multiply;
+  }
+
+  &__subtitle {
+    color: $color-grey;
+    font: $roboto-slab-bold-44;
+
+    @include media-breakpoint-down(sm) {
+      letter-spacing: .45px;
+      font: $roboto-slab-bold-25;
+    }
+    mix-blend-mode: color-burn;
+  }
+
+  .letter-spacing {
+    letter-spacing: .90px;
+  }
+
+  &_3 &__text-container {
+    @include media-breakpoint-up(xl) {
+      margin-left: auto;
+    }
+  }
+
+  &_3 &__title {
+    color: $color-black;
+    font: $roboto-slab-bold-55;
+
+    @include media-breakpoint-down(sm) {
+      font: $roboto-slab-bold-34;
+    }
+  }
+
+  &_3 &__subtitle {
+    color: $color-milk;
+    font: $roboto-slab-bold-48;
+
+    @include media-breakpoint-down(sm) {
+      font: $roboto-slab-bold-29;
+    }
+    mix-blend-mode: normal;
+  }
+
+  &_3 .letter-spacing {
+    letter-spacing: .60px;
+  }
+}

@@ -1,0 +1,39 @@
+{% extends 'Page/Backend/templates/filebrowser/layout.html.twig' %}
+
+
+{% block body %}
+
+<div class="panel panel-default">
+    <div class="panel-heading">Изображения к разделу "{{ article_title }}"</div>
+    <div class="panel-body">
+        {% for thispageimage in thispageimages %}
+        <div class="image_item">
+            <a href="javascript:;" data-url="{{ thispageimage.url }}" data-id="{{ thispageimage.id }}"><img src="{{ thispageimage.url }}" width="60" height="50" border=0 /></a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading"><a href="javascript:;" data-toggle="collapse" data-target="#gallery_images">Изображения фотогалереи раздела "{{ article_title }}"</a></div>
+    <div class="panel-body collapse" id="gallery_images">
+        {% for galleryimage in galleryimages %}
+        <div class="image_item">
+            <a href="javascript:;" data-url="{{ galleryimage.url }}" data-id="{{ galleryimage.id }}"><img src="{{ galleryimage.url }}" width="60" height="50" border=0 /></a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading"><a href="javascript:;" data-toggle="collapse" data-target="#other_images">Изображения к другим разделам</a></div>
+    <div class="panel-body collapse" id="other_images">
+        {% for otherimage in otherimages %}
+        <div class="image_item">
+            <a href="javascript:;" data-url="{{ otherimage.url }}" data-id="{{ otherimage.id }}"><img src="{{ otherimage.url }}" width="60" height="50" border=0 /></a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,28 @@
+<section class="services">
+    <div class="container">
+        <div class="row no-gutters">
+
+            <h2 class="title">{{ article.title }}</h2>
+
+
+            {{ article.main_text | raw }}
+
+            {% if photos | length > 0 %}
+                <div class="right-col-gallery">
+                    {% set first_photo = photos | first %}
+                    {% for photo in photos %}
+                        <div class="gallery-item{% if loop.index > 4 %} hidden{% endif %}">
+                            <a data-fancybox="gallery" href="/uplds/{{ article.id }}/gallery/{{ photo.filename }}" title="{{ photo.title }}" data-caption="{{ photo.title }}"><img src="/uplds/{{ article.id }}/gallery/sm_{{ photo.filename }}" border="0" class="img-responsive" /></a>
+                        </div>
+                    {% endfor %}
+                    <div class="clearfix"></div>
+                    <a href="javascript:;" onClick="$('[data-fancybox]').eq(0).trigger('click'); return false;" class="all-photos">{{ photos | length }} фото</a>
+                </div>
+            {% endif %}
+
+
+
+        </div>
+    </div>
+</section>
+

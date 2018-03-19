@@ -1,0 +1,105 @@
+.reviews {
+  padding-bottom: 37px;
+  background: $color-brown;
+
+  &__title {
+    color: $color-white;
+  }
+
+  &__slider {
+    padding: 0 105px;
+
+    @include media-breakpoint-down(sm) {
+      padding: 0;
+    }
+  }
+
+  &__slide {
+    width: 1034px;
+    margin-right: 10px;
+
+    @include media-breakpoint-down(lg) {
+      width: 718px;
+    }
+    @include media-breakpoint-down(md) {
+      width: 478px;
+    }
+    @include media-breakpoint-down(sm) {
+      width: 510px;
+    }
+    @include media-breakpoint-down(xs) {
+      width: calc(100vw - 30px);
+    }
+  }
+
+  &__message {
+    position: relative;
+    min-height: 218px;
+    margin-bottom: 71px;
+    padding: 37px 210px 72px 66px;
+    white-space: normal;
+    border-radius: 10px;
+    background: $color-white;
+    font: $roboto-regular-24;
+
+    @include media-breakpoint-down(lg) {
+      padding: 37px 150px 35px 62px;
+    }
+    @include media-breakpoint-down(md) {
+      margin-bottom: 40px;
+      padding: 37px 37px 72px 66px;
+    }
+    @include media-breakpoint-down(sm) {
+      padding: 19px 23px 29px 32px;
+      font: $roboto-regular-18;
+    }
+    @include media-breakpoint-down(xs) {
+      margin-bottom: 35px;
+      padding: 10px 10px 10px 10px;
+      font: $roboto-regular-14;
+    }
+
+    &:after {
+      position: absolute;
+      top: 100%;
+      right: 75px;
+      content: '';
+      border-width: 50px 30px 0 30px;
+      border-style: solid;
+      border-color: $color-white transparent;
+
+      @include media-breakpoint-down(lg) {
+        border-width: 25px 15px 0 15px;
+      }
+      @include media-breakpoint-down(xs) {
+        right: 20px;
+        border-width: 10px 6px 0 6px;
+      }
+    }
+  }
+
+  &__author {
+    min-height: 23px;
+    text-align: right;
+    color: $color-white;
+    font: $roboto-bold-24;
+
+    @include media-breakpoint-down(sm) {
+      font: $roboto-bold-15;
+    }
+  }
+
+  &__arrow {
+    margin-top: -50px;
+
+    @include media-breakpoint-down(sm) {
+      margin-top: 0;
+      top: -70px !important;
+    }
+  }
+
+  h2 {
+    display: inline-block;
+  }
+
+}

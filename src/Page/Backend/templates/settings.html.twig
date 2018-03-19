@@ -1,0 +1,59 @@
+<h1>Настройки сайта</h1>
+
+<form action="" enctype="multipart/form-data" method="post" class="form">
+
+    <div class="form-group panel panel-info">
+        <div class="panel-heading">
+            Изменить пароль администратора
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label for="admin_password">Новый пароль</label>
+                <input type="text" name="admin_password" id="admin_password" class="form-control input-sm" value="" />
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group panel panel-info">
+        <div class="panel-heading">
+            Изменить email администратора:
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label for="admin_email">E-mail</label>
+                <input type="text" name="admin_email" id="admin_email" class="form-control input-sm" value="{{ settings.admin_email }}" />
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group panel panel-info">
+        <div class="panel-heading">
+            Meta keywords по умолчанию:
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label for="meta_keywords">Meta keywords</label>
+                <textarea name='meta_keywords' id='meta_keywords' class="form-control input-sm">{{ settings.meta_keywords }}</textarea>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group panel panel-info">
+        <div class="panel-heading">
+            Meta description по умолчанию:
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label for="meta_description">Meta description</label>
+                <textarea name='meta_description' id='meta_description' class="form-control input-sm">{{ settings.meta_description }}</textarea>
+            </div>
+        </div>
+    </div>
+
+    <input value="Внести изменения" name="Update" type="submit" class="btn btn-default" />
+</form>
+
+</td>
+</tr>
+</table>
+

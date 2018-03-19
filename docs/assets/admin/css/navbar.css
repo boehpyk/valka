@@ -1,0 +1,38 @@
+.navbar .nav>li {
+}
+.navbar .nav>li:hover {
+}
+.navbar .nav a {
+}
+.navbar .nav>li:hover > a {
+}
+.navbar .nav>li>a:focus, .navbar .nav>li>a:hover {
+}
+/* disabled link */
+.dropdown-menu>.disabled>a, .dropdown-menu>.disabled>a:hover, .dropdown-menu>.disabled>a:focus {
+}
+.navbar .nav>li:last-child {
+}
+/* active link */
+.navbar .nav>.active>a, .navbar .nav>.active>a:hover, .navbar .nav>.active>a:focus {
+}
+/*  */
+.navbar .nav>li>a {
+}
+/* dropdown */
+.dropdown-menu {
+    top: 0;
+    left: 90%;
+}
+.dropdown-menu>li>a {
+}
+.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus, .dropdown-submenu:hover>a, .dropdown-submenu:focus>a {
+}
+/*  shows the dropdown on hover*/
+.navbar ul.nav li:hover > ul.dropdown-menu {
+    display: block;
+}
+/* before and after */
+.navbar .nav > li > .dropdown-menu::before, .navbar .nav > li > .dropdown-menu::after {
+    display: none;
+}

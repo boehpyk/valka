@@ -1,0 +1,95 @@
+{#{% extends 'Page/Backend/templates/layout.html.twig' %}#}
+
+{#{% set article_id = article.id %}#}
+{#{% set sidebar = sidebar %}#}
+
+{#{% block content %}#}
+
+
+
+    <h1>&laquo;Типы событий&raquo;</h1>
+
+<form enctype="multipart/form-data" method="post" name="mainForm" id="mainForm">
+
+    <button id="submit_btn2" class="btn btn-primary" onClick="return ConfirmDelete()">Внести изменения</button>
+
+    <br /><br />
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Типы событий</div>
+        <div class="panel-body" id="subdeps">
+            <table class="subdeps table">
+                <tr>
+                    <th class="dep_title col-lg-10 col-md-10 col-sm-10 col-xs-10">Название</th>
+                    <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1" title="Публиковать"><span class="glyphicon glyphicon-ok publish-th"></span></th>
+                    <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1" title="Удалить"><span class="glyphicon glyphicon-remove delete-th"></span></th>
+                </tr>
+            {% for eventtype in eventtypes %}
+                <tr>
+                    <td class="col-lg-10 col-md-10 col-sm-10 col-xs-10"><input type="text" name='sub_title[{{ eventtype.id }}]' id='sub_title[{{ eventtype.id }}]' value='{{ eventtype.title }}' class="form-control" /></td>
+                    <td class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><input {{ eventtype.publish_checked }} value="yes" name="sub_publish[{{ eventtype.id }}]" type="checkbox" class="subdep-manage" data-role="publish" /></td>
+                    <td class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><input value="yes" name="delete[{{ eventtype.id }}]" type="checkbox" class="subdep-manage" data-role="delete" /></td>
+                    <input type="hidden" name="exists[{{ eventtype.id }}]" value="yes">
+                </tr>
+            {% endfor %}
+            </table>
+
+        </div>
+    </div>
+
+    <input type="hidden" name="Update" value="Update" />
+    <button id="submit_btn" class="btn btn-primary" onClick="return ConfirmDelete()">Внести изменения</button>
+</form>
+
+
+<h3>Добавить тип событий</h3>
+
+<form enctype="multipart/form-data" method="post" class="add-form" role="form">
+    <div class="form-group panel panel-info">
+        <div class="panel-heading">
+            <label for="add_title">Заголовок</label>
+        </div>
+        <div class="panel panel-body">
+            <div class="form-group">
+                <input type="text" class="form-control" name="event_type_title" id="event_type_title" placeholder="Название типа событий" />
+            </div>
+            <input value="добавить" class="btn btn-primary" name="Add" type="submit" />
+        </div>
+    </div>
+
+</form>
+<p><br /></p>
+
+
+
+{#{% endblock %}#}
+
+
+
+{#{% block javascripts %}#}
+    {#{{ parent() }}#}
+    <script>
+        $().ready(function() {
+            $('.add-form').bootstrapValidator({
+                message: 'Введенное значение неверно!',
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+                    event_type_title: {
+                        message: 'Неверное значение в поле Заголовок',
+                        validators: {
+                            notEmpty: {
+                                message: 'Поле "Заголовок" не может быть пустым'
+                            },
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+{#{% endblock %}#}
+
+

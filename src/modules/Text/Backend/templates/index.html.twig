@@ -1,0 +1,59 @@
+{% set article_id = 0 %}
+
+{% block content %}
+
+
+
+    <h1>Редактор разделов</h1>
+    <form enctype="multipart/form-data" method="post" name="mainForm" id="mainForm">
+        <input type="hidden" name="parent_id" value="0">
+
+
+        {{ subdeps | raw }}
+
+
+        <input type="hidden" name="lang" value="{lang_}">
+        <input type="hidden" name="Update" value="Update">
+        <button class="btn btn-primary" id="submit_btn" onClick="return ConfirmDelete()">Внести изменения</button>
+        <br><br><br>
+    </form>
+
+
+
+
+
+
+
+    <h2>Добавить раздел</h2>
+
+    <form enctype="multipart/form-data" method="post" class="add-form" role="form">
+        <div class="form-group panel panel-info">
+            <div class="panel-heading">
+                <label for="typeAdd">Тип раздела</label>
+                <select name="subtype" class="form-control">
+                    <option value="Text">обычный текстовый</option>
+                    <option value="Endpoint">список подразделов</option>
+                    <option value="NewsList">новости</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group panel panel-info">
+            <div class="panel-heading">
+                <label for="title">Заголовок</label>
+                <input type="text" class="form-control" name="title" id="add_title" placeholder="Заголовок раздела" onChange="makeServiceName(this, 'add_service_name')" />
+            </div>
+        </div>
+
+        <div class="form-group panel panel-info">
+            <div class="panel-heading">
+                <label for="service_name">Служебное название (для URL)</label>
+                <input type="text" class="form-control" name="service_name" id="add_service_name" placeholder="URL" />
+            </div>
+        </div>
+        <input value="добавить" class="btn btn-primary" name="Add" type="submit"></td>
+        <input type="hidden" name="parent_id" value="0">
+    </form>
+
+
+{% endblock %}

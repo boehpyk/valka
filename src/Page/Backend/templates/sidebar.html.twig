@@ -1,0 +1,39 @@
+{% block sidebar %}
+
+<script language="Javascript">
+    var expanded = new Array({ parents_arr });
+    $().ready(function() {
+        for(var i=0; i<expanded.length; i++) {
+            $("#dep"+expanded[i]).collapse("show");
+            $("#btn"+expanded[i]).html("-");
+        }
+    });
+</script>
+
+
+<h3><a href="/admin/">Разделы сайта</a></h3>
+
+<div class="navbar-default sidebar" role="navigation">
+    <div class="sidebar-nav navbar-collapse">
+        <ul class="nav" id="side-menu">
+            <li><a href="/admin/first_page/">Главная страница</a></li>
+
+            {{ pages_tree }}
+
+        </ul>
+
+    </div>
+</div>
+<h3>Прочие настройки</h3>
+<ul class="nav" id="side-menu">
+    <li>
+        <li><a href="/admin/settings/">Настройки</a></li>
+    </li>
+</ul>
+
+<p class="login-info bg-info">
+    Вы в системе под логином <a href="{url_profile}" title="ссылка на профиль">{login}</a><br>
+    <a target="_top" href="/admin/logout"><b>выйти</b></a>
+</p>
+
+{% endblock %}

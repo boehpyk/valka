@@ -1,0 +1,141 @@
+<h1>Раздел &laquo;{{ article.title }}&raquo;</h1>
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <ol class="breadcrumb">
+            {{ path | raw }}
+        </ol>
+    </div>
+</div>
+
+
+<form enctype="multipart/form-data" method="post" name="mainForm" id="mainForm">
+    <div class="panel panel-default">
+        <div class="panel-heading"><a href="javascript:;" data-toggle="collapse" data-target="#params" class="toggle-block" data-params="params">Параметры <span class="caret-right" id="paramsCaret"></span></a></div>
+        <div class="panel-body collapse" id="params">
+            <table class="text-parts-table table table-bordered">
+                <tr>
+                    <td class="active">Тип</td>
+                    <td>Отзыв</td>
+                </tr>
+                <tr>
+                    <td class="active">Заголовок</td>
+                    <td><input type="text" class="form-control" name="title" id="add_title" placeholder="Заголовок" value="{{ article.title }}" /></td>
+                </tr>
+                <tr>
+                    <td class="active">Публикация на сайте</td>
+                    <td>
+                        <select name="publish" id='publish' class="form-control">
+                            <option value="no" >Нет</option>
+                            <option value="yes" {% if article.publish == 'yes' %}selected{% endif %}>Да</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="active">Дата добавления на сайт</td>
+                    <td>{{ article.date_add | date('d.m.Y') }}</td>
+                </tr>
+
+                <tr>
+                    <td class="active">Дата последнего обновления</td>
+                    <td>{{ article.date_update | date('d.m.Y') }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Параметры</div>
+        <div class="panel-body">
+            <table class="text-parts-table table table-bordered">
+                <tr>
+                    <td class="title" width="20%">Имя</td>
+                    <td><input type="text" name='name' id='name' value='{{ article.name }}'  class="form-control"></td>
+                </tr>
+                <tr>
+                    <td class="title" width="20%">E-mail</td>
+                    <td><input type="text" name='email' id='email' value='{{ article.email }}'  class="form-control"></td>
+                </tr>
+                <tr>
+                    <td class="title" width="20%">Вопрос</td>
+                    <td><textarea name='question' id='question' class="form-control">{{ article.question }}</textarea></td>
+                </tr>
+                <tr>
+                    <td class="active">Дата</td>
+                    <td>
+                        <div class='input-group date'>
+                            <input type='text' class="form-control" name="date" id='date' value="{{ article.date | date('d.m.Y') }}"/>
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    {#<div class="panel panel-default">#}
+        {#<div class="panel-heading">Ответ</div>#}
+        {#<div class="panel-body">#}
+
+            {#<table cellspacing="0" width="100%">#}
+                {#<tr>#}
+                    {#<td class="title" width="20%">Отвечает</td>#}
+                    {#<td>#}
+                        {#<input type="text" name="replier" class="form-control" value="{replier}" />#}
+                    {#</td>#}
+                {#</tr>#}
+                {#<tr>#}
+                    {#<td class="title" width="20%">Ответ</td>#}
+                    {#<td>#}
+                        {#<textarea name="reply" id="reply" id='reply' type="textarea"  class="form-control mceEditor" >{reply}</textarea>#}
+                    {#</td>#}
+                {#</tr>#}
+            {#</table>#}
+
+        {#</div>#}
+    {#</div>#}
+
+
+    <input type="hidden" name="article_id" id='article_id' value="{{ article.id }}">
+    <input type="hidden" name="parent_id" id='parent_id' value="{{ article.id }}">
+    <input type="hidden" name="lang" value="{lang}">
+
+
+    <input type="hidden" name="Update" value="Update">
+    <button id="submit_btn" class="btn btn-primary" onClick="return ConfirmDelete()">Внести изменения</button>
+
+    <br><br><br>
+</form>
+
+
+<script>
+    $().ready(function() {
+        $('.add-form').bootstrapValidator({
+            message: 'Введенное значение неверно!',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                question: {
+                    message: 'Неверное значение в поле Отзыв',
+                    validators: {
+                        notEmpty: {
+                            message: 'Поле "Отзыв" не может быть пустым'
+                        },
+                    }
+                }
+            }
+        });
+
+        $('#date').datepicker({
+            format: "dd.mm.yyyy",
+            language: "ru"
+        });
+
+    });
+</script>

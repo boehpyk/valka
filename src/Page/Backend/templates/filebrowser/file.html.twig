@@ -1,0 +1,63 @@
+{% extends 'Page/Backend/templates/filebrowser/layout.html.twig' %}
+
+{% block body %}
+
+
+<div class="panel panel-default">
+    <div class="panel-heading"><a href="javascript:;" data-toggle="collapse" data-target="#sitepages" class="toggle-block" data-params="sitepages">Страницы сайта <span class="caret-right" id="paramsCaret"></span></a></div>
+    <div class="panel-body collapse" id="sitepages">
+        {{ pages_list | raw }}
+    </div>
+</div>
+
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">Файлы к разделу "{{ article_title }}"</div>
+    <div class="panel-body">
+        {% for thispagefile in thispagefiles %}
+        <div class="radio">
+            <label>
+                <input type="radio" name="url" value="{{ thispagefile.url }}" />
+                {{ thispagefile.filename }}
+            </label>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">Файлы фотогалереи раздела "{{ article_title }}"</div>
+    <div class="panel-body">
+        {% for galleryfile in galleryfiles %}
+        <div class="radio">
+            <label>
+                <input type="radio" name="url" value="{url}" />
+                {{ galleryfile.url }} {{ galleryfile.title }}
+            </label>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">Файлы к другим разделам</div>
+    <div class="panel-body">
+        {% for otherfile in otherfiles %}
+        <div class="radio">
+            <label>
+                <input type="radio" name="url" value="{url}" />
+                {{ otherfile.filename }} {{ otherfile.title }}
+            </label>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+{% endblock %}

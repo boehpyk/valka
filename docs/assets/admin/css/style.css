@@ -1,0 +1,154 @@
+.publish-th {
+    font-size: 16pt;
+    color: green;
+}
+.menu-th {
+    font-size: 16pt;
+    color: blue;
+}
+.delete-th {
+    font-size: 16pt;
+    color: red;
+}
+.main-th {
+    font-size: 16pt;
+    color: darkorange;
+}
+
+iframe body {
+    padding: 15px;
+}
+.caret-right {
+    border-bottom: 4px solid transparent;
+    border-top: 4px solid transparent;
+    border-left: 4px solid;
+    display: inline-block;
+    height: 0;
+    width: 0;
+    margin-left: 3px;
+}
+h1 {
+    font-size: 16pt;
+    margin: 0px 0px 20px 0px;
+}
+h3 {
+    color: #000;
+    font-size: 13pt;
+}
+h3 a {
+    color: #000000;
+    text-decoration: none;
+}
+h3 a:hover {
+    text-decoration: underline;
+}
+.admin-menu {
+    background-color: #efefef;
+    padding-bottom: 100%;
+    margin-bottom: -100%;
+}
+.admin-menu .sidebar {
+    background-color: #ffffff;
+    padding: 15px 0;
+    border: solid 1px #bce8f1;
+    border-radius: 6px;
+}
+.admin-menu .navbar-default .navbar-collapse {
+    max-height: none;
+}
+.admin-menu .navbar-default ul {
+    margin: 0;
+    background-color: #ffffff;
+}
+.admin-menu .navbar-default ul>li>ul{
+    margin-left: 15px;
+    font-size: 13px;
+}
+.admin-menu  .nav>li>a {
+    padding: 5px 5px;
+    line-height: 1;
+    margin-left: 15px;
+}
+button.expand-btn {
+    float: left;
+    width: 15px;
+    height: 15px;
+    padding: 0px;
+    font-size: 12px;
+    line-height: 1.1;
+    margin: 4px 5px 0px 0px;
+}
+.login-info {
+    margin: 20px 0;
+    padding: 10px;
+    text-align: center;
+}
+table.subdeps .dep_title {
+    width: 50%;
+}
+#draggablePanelList .panel-heading, #draggablePanelList2 .panel-heading {
+    cursor: move;
+}
+#draggablePanelList .panel-info, #draggablePanelList2 .panel-info {
+    margin: 0px 0px 5px 0px;
+}
+
+.form-horizontal {
+    margin-left: 10px;
+}
+.add-form .panel {
+    margin-bottom: 10px;
+}
+.has-feedback .form-control-feedback {
+    top: 35px;
+    right: 15px;
+}
+.form-horizontal .has-feedback .form-control-feedback {
+    top: 0;
+    right: 15px;
+}
+#mainForm .panel-heading, .panel-heading-blue {
+    background-color: #bce8f1;
+    font-weight: bold;
+}
+.panel-heading.blue {
+    background-color: #bce8f1;
+    font-weight: bold;
+}
+
+#mainForm .panel-heading a {
+    color: #000000;
+}
+.breadcrumb {
+    margin: 0;
+    padding: 4px;
+    font-size: 10pt;
+}
+.breadcrumb {
+    margin: 0;
+    background: none;
+}
+.text-parts-table td.active {
+    width: 20%;
+    font-weight: bold;
+}
+#imageModal {
+    z-index: 100;
+}
+.photos-add {
+    width: 100%;
+}
+.photos-add td, table.photos-add th {
+    padding: 4px;
+}
+.photos-add th {
+    background-color: #bce8f1;
+}
+.main_content {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+#side-menu > li > ul {
+    margin-left: 15px;
+    list-style: none;
+}

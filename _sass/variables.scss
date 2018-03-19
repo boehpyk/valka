@@ -1,0 +1,50 @@
+/* Colors */
+
+$color-beige: #ddd6c4;
+$color-beige-dark: #c9b5ae;
+$color-black: #020502;
+$color-blue: #7b9fc1;
+$color-brown-light: #a7887d;
+$color-brown: #8a6152;
+$color-brown-bright: #d96a25;
+$color-orange: #be785d;
+$color-white: #fff;
+$color-grey: #6f6f6f;
+$color-milk: #ded6c5;
+
+/* Fonts */
+
+$roboto-regular-14: 400 14px Roboto;
+$roboto-regular-18: 400 18px Roboto;
+$roboto-regular-24: 400 24px Roboto;
+$roboto-regular-30: 400 30px Roboto;
+$roboto-bold-15: 700 15px Roboto;
+$roboto-bold-21: 700 21px Roboto;
+$roboto-bold-24: 700 24px Roboto;
+$roboto-bold-30: 700 30px Roboto;
+
+$roboto-slab-regular-14: 400 14px Roboto Slab;
+$roboto-slab-regular-24: 400 24px Roboto Slab;
+$roboto-slab-regular-30: 400 30px Roboto Slab;
+$roboto-slab-bold-18: 700 18px Roboto Slab;
+$roboto-slab-bold-24: 700 24px Roboto Slab;
+$roboto-slab-bold-25: 700 25px Roboto Slab;
+$roboto-slab-bold-29: 700 29px Roboto Slab;
+$roboto-slab-bold-30: 700 30px Roboto Slab;
+$roboto-slab-bold-34: 700 34px Roboto Slab;
+$roboto-slab-bold-40: 700 40px Roboto Slab;
+$roboto-slab-bold-44: 700 44px Roboto Slab;
+$roboto-slab-bold-46: 700 46px Roboto Slab;
+$roboto-slab-bold-48: 700 48px Roboto Slab;
+$roboto-slab-bold-55: 700 55px Roboto Slab;
+$roboto-slab-bold-58: 700 58px Roboto Slab;
+
+/* Transitions */
+
+$transition-fast: .3s;
+$transition-medium: .5s;
+
+/* Bootstrap rewrites */
+
+$grid-breakpoints: (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1340px);
+$container-max-widths: (sm: 540px, md: 720px, lg: 960px, xl: 1280px);

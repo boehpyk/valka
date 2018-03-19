@@ -1,0 +1,44 @@
+.services {
+  background: $color-white url('/assets/pctrs/services-bg.jpg');
+  background-size: auto 110%;
+  background-position: center top;
+  padding-bottom: 50px;
+
+  &__flex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+
+    @include media-breakpoint-down(md) {
+      justify-content: center;
+    }
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 140px;
+
+    &:nth-child(2),
+    &:nth-child(3) {
+      .services__image {
+        margin-right: 10px;
+      }
+    }
+  }
+
+  &__image {
+    margin-top: auto;
+    color: $color-brown-bright;
+  }
+
+  &__label {
+    margin-top: 12px;
+    display: block;
+    height: 42px;
+    font: $roboto-bold-21;
+    text-align: center;
+  }
+}

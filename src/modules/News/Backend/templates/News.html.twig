@@ -1,0 +1,203 @@
+{#{% extends 'Page/Backend/templates/layout.html.twig' %}#}
+
+{#{% set article_id = article.id %}#}
+{#{% set sidebar = sidebar %}#}
+
+{#{% block content %}#}
+
+
+
+    <h1>Раздел &laquo;{{ article.title }}&raquo;</h1>
+
+<form enctype="multipart/form-data" method="post" name="mainForm" id="mainForm">
+
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <ol class="breadcrumb">
+                {{ path | raw }}
+            </ol>
+        </div>
+    </div>
+
+    <button id="submit_btn2" class="btn btn-primary" onClick="return ConfirmDelete()">Внести изменения</button>
+
+    <br /><br />
+
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#">Текст и общие параметры</a></li>
+        <li role="presentation"><a href="/admin/gallery/?article_id={id}">Фотогалерея</a></li>
+    </ul>
+
+
+    <div class="panel panel-default">
+        <div class="panel-heading"><a href="javascript:;" data-toggle="collapse" data-target="#params" class="toggle-block" data-params="params">Параметры <span class="caret-right" id="paramsCaret"></span></a></div>
+        <div class="panel-body collapse" id="params">
+            <table class="text-parts-table table table-bordered">
+                <tr>
+                    <td class="active">Тип</td>
+                    <td>Текстовый</td>
+                </tr>
+                <tr>
+                    <td class="active">Заголовок</td>
+                    <td><input type="text" class="form-control" name="title" id="title" placeholder="Заголовок" value="{{ article.title }}" /></td>
+                </tr>
+                <tr>
+                    <td class="active">Служебное имя</td>
+                    <td><input type="text" name='service_name' id='service_name' value='{{ article.service_name }}'  class="form-control" disabled /></td>
+                </tr>
+                <tr>
+                    <td class="active">Публикация на сайте</td>
+                    <td>
+                        <select name="publish" id='publish' class="form-control">
+                            <option value="no" >Нет</option>
+                            <option value="yes"{% if article.publish == 'yes' %} selected{% endif %}>Да</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="active">Участие в основном меню</td>
+                    <td><select name="menu" id='menu' class="form-control">
+                            <option value="no">Нет</option>
+                            <option value="yes"{% if article.menu == 'yes' %} selected{% endif %}>Да</option>
+                        </select>
+                        &nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="active">Дата добавления на сайт</td>
+                    <td>{{ article.date_add | date('d.m.Y H:i') }}</td>
+                </tr>
+
+                <tr>
+                    <td class="active">Дата последнего обновления</td>
+                    <td>{{ article.date_update | date('d.m.Y H:i') }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading"><a href="javascript:;" data-toggle="collapse" data-target="#seo" class="toggle-block" data-params="seo">SEO <span class="caret-right" id="seoCaret"></span></a></div>
+        <div class="panel-body collapse" id="seo">
+            <table class="text-parts-table table table-bordered">
+                <tr>
+                    <td class="active">Meta keywords</td>
+                    <td>
+                        <textarea name='meta_keywords' id='meta_keywords' class="form-control" rows="2">{{ article.meta_keywords }}</textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="active">Meta description</td>
+                    <td>
+                        <textarea name='meta_description' id='meta_description' class="form-control" rows="2">{{ article.meta_description }}</textarea>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Параметры новости</div>
+        <div class="panel-body">
+            <table class="text-parts-table table table-bordered">
+                <tr>
+                    <td class="active">Заголовок</td>
+                    <td><input type="text" class="form-control" name="title" id="title" placeholder="Заголовок" value="{{ article.title }}" /></td>
+                </tr>
+                <tr>
+                    <td class="active">Дата</td>
+                    <td>
+                        <div class='input-group date'>
+                            <input type='text' class="form-control" name="date" id='date' value="{{ article.date | date('d.m.Y') }}"/>
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </td>
+                </tr>
+                {#<tr>#}
+                    {#<td class="active">Анонс</td>#}
+                    {#<td>#}
+                        {#<textarea name="lid" id='lid' class="mceEditor form-control" type="textarea"  style="width:100%; height:100px">#}
+                            {#{{ article.lid }}#}
+                        {#</textarea>#}
+                    {#</td>#}
+                {#</tr>#}
+                <tr>
+                    <td class="active">Изображение для списков</td>
+                    <td><img src="/uplds/{{ article.id }}/fp_image_{{ article.id }}.jpg" style="max-width: 200px; height: auto;" /><br><input type="file" name="fp_image" id='fp_image' class='text' size='0'> заменить картинку</td>
+                </tr>
+
+            </table>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Основной текст</div>
+        <div class="panel-body">
+
+            <textarea name="main_text" id='main_text' class="mceEditor form-control" type="textarea"  style="width:100%; height:350px">
+                {{ article.main_text }}
+            </textarea>
+
+        </div>
+    </div>
+
+
+    <input type="hidden" name="article_id" id='article_id' value="{{ article.id }}" />
+    <input type="hidden" name="global_title" id='global_title' value="" />
+    <input type="hidden" name="parent_id" id='parent_id' value="{{ article.parent_id }}" />
+    <input type="hidden" name="lang" value="{lang}" />
+
+    <input type="hidden" name="Update" value="Update" />
+    <button id="submit_btn" class="btn btn-primary" onClick="return ConfirmDelete()">Внести изменения</button>
+</form>
+
+<form method="post">
+    <div class="pull-right" style="margin-top: -35px;">
+        <input type="hidden" name="deleteArticle" value="deleteArticle" />
+        <input type="hidden" name="parent_id" value="{{ article.parent_id }}" />
+        <input type="hidden" name="parent_id" id='parent_type' value="{{ article.type }}" />
+        <button id="delete_btn" class="btn btn-danger" onClick="return confirmDeleteSimple()">Удалить страницу</button>
+    </div>
+</form>
+
+<br><br><br>
+
+
+{#{% endblock %}#}
+
+
+
+{#{% block javascripts %}#}
+    {#{{ parent() }}#}
+    <script>
+        $().ready(function() {
+            $('.add-form').bootstrapValidator({
+                message: 'Введенное значение неверно!',
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+                    title: {
+                        message: 'Неверное значение в поле Заголовок',
+                        validators: {
+                            notEmpty: {
+                                message: 'Поле "Заголовок" не может быть пустым'
+                            },
+                        }
+                    }
+                }
+            });
+
+            $('#date').datepicker({
+                format: "dd.mm.yyyy",
+                language: "ru"
+            });
+
+        });
+    </script>
+{#{% endblock %}#}
+
+

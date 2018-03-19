@@ -1,0 +1,73 @@
+.slider {
+    position: relative;
+    /**
+   * (optional) define here the style definitions which should be applied on the slider container
+   * e.g. width including further controls like arrows etc.
+   */
+    max-width: 100%;
+    .frame {
+        position: relative;
+        overflow: hidden;
+        /**
+   * (optional) wrapper width, specifies width of the slider frame.
+   */
+        // width: 500px;
+        white-space: nowrap;
+        font-size: 0;
+        line-height: 0;
+    }
+    .slides {
+        display: inline-block;
+        margin-bottom: 0;
+    }
+    li {
+        position: relative;
+        display: inline-block;
+        /**
+   * (optional) if the content inside the slide element has a defined size.
+   */
+        // width: 880px;
+    }
+    .prev,
+    .next {
+        position: absolute;
+        top: calc(50% - 27.5px);
+        display: block;
+        cursor: pointer;
+        @include media-breakpoint-down(md) {
+            transform: scale(.5);
+        }
+    }
+    .next {
+        right: 20px;
+        @include media-breakpoint-down(xs) {
+            right: 0;
+        }
+    }
+    .prev {
+        left: 20px;
+        @include media-breakpoint-down(xs) {
+            left: 0;
+        }
+    }
+    .dots {
+        position: absolute;
+        bottom: 10px;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        li {
+            display: inline-block;
+            width: 22px;
+            height: 22px;
+            margin: 0 5px;
+            cursor: pointer;
+            border-radius: 11px;
+            background-color: $color-brown-bright;
+        }
+        li.active {
+            background-color: $color-white;
+        }
+    }
+}

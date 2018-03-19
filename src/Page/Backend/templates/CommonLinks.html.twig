@@ -1,0 +1,20 @@
+<h1>Общие ссылки</h1>
+
+<form action="" enctype="multipart/form-data" method="post" class="form">
+
+    <div class="panel panel-info">
+        <div class="panel-heading">Редактировать ссылки</div>
+        <div class="panel-body">
+            <table class="text-parts-table table table-bordered">
+                {% for link in links %}
+                <tr>
+                    <td class="active">{{ link.title }}</td>
+                    <td><input type="text" class="form-control" name="fields[{{ link.name }}]" placeholder="{{ link.title }}" value="{{ link.value }}" /></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <input value="Внести изменения" name="Update" type="submit" class="btn btn-info" />
+</form>
+

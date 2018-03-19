@@ -1,0 +1,63 @@
+
+<h1>Раздел &laquo;{{ article.title }}&raquo;. Правая колонка</h1>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li role="presentation"><a href="/{% if app.debug == true %}index_dev.php/{% endif %}admin/article/{{ article.id }}/">Текст и общие параметры</a></li>
+        <li role="presentation"><a href="/{% if app.debug == true %}index_dev.php/{% endif %}admin/gallery/{{ article.id }}/">Фотогалерея</a></li>
+        <li role="presentation" class="active"><a href="/{% if app.debug == true %}index_dev.php/{% endif %}admin/rightcol/{{ article.id }}/">Правая колонка</a></li>
+</ul>
+
+<form enctype="multipart/form-data" method="post" name="mainForm" id="mainForm">
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Правая колонка:</div>
+        <div class="panel-body">
+
+            <table width="100%" class="table">
+                <tr>
+                    <th>Картинка для правой колонки</th>
+                    <th>Текст для правой колонки</th>
+                </tr>
+                <tr valign="top">
+                    <td>
+                        <img src="/uplds/{{ article.id }}/rightcolimage{{ article.id }}.jpg" border="0" /><br><input type="file" name="right_col_image" id='right_col_image' />
+                        <p><br></p>
+                        <p>
+                            <input type="checkbox" name="del_image" value="yes" /> удалить картинку
+                        </p>
+                        <p><b>Подзаголовок (для расфасовочной страницы)</b></p>
+                        <p><input type="text" name="right_col_subtitle" value="{{ article.right_col_subtitle }}" class="form-control" /></p>
+                    </td>
+                    <td width="50%">
+                    <textarea name="right_col_text" id='right_col_text' class="mceEditor form-control" type="textarea"  style="width:100%; height:200px">
+                        {{ article.right_col_text }}
+                    </textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <th colspan="2">Другие материалы по теме</th>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <textarea name="right_col_seealso" id='right_col_seealso' class="mceEditor form-control" type="textarea"  style="width:100%; height:150px">
+                            {{ article.right_col_seealso }}
+                        </textarea>
+                    </td>
+                </tr>
+
+            </table>
+
+        </div>
+    </div>
+
+
+    <input type="hidden" name="article_id" id='article_id' value="{{ article.id }}">
+    <input type="hidden" name="parent_id" id='parent_id' value="{{ article.parent_id }}">
+
+
+    <!-- <input value="Внести изменения" name="Update" type="submit" class="but_main" onClick="return ConfirmDelete()"> -->
+    <button class="btn btn-primary" id="submit_btn" onClick="return ConfirmDelete()">Внести изменения</button>
+    <input type="hidden" name="Update" id='Update' value="Сохранить">
+
+
+</form>

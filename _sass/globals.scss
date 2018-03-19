@@ -1,0 +1,57 @@
+body {
+  padding-top: 233px;
+  background-color: $color-black;
+  font-family: 'Roboto', sans-serif;
+
+  @include media-breakpoint-down(md) {
+    padding-top: 47px;
+  }
+}
+
+* {
+  outline: none !important;
+}
+
+.title {
+  width: 100%;
+  margin: 25px 0;
+  text-align: center;
+  font: $roboto-slab-bold-48;
+
+  @include media-breakpoint-down(md) {
+    font: $roboto-slab-bold-40;
+  }
+  @include media-breakpoint-down(sm) {
+    font: $roboto-slab-bold-30;
+  }
+}
+
+.icon {
+  display: inline-block;
+  fill: currentColor;
+}
+
+.large-button {
+  margin: 35px auto;
+  padding: 12px 15px 10px;
+  cursor: pointer;
+  color: $color-white;
+  border-width: 0;
+  border-radius: 10px;
+  background-color: $color-brown-bright;
+  font: $roboto-bold-30;
+
+  @include media-breakpoint-down(md) {
+    font: $roboto-bold-24;
+  }
+  @include media-breakpoint-down(sm) {
+    font: $roboto-bold-21;
+  }
+}
+
+.link-default {
+  &:hover {
+    text-decoration: none;
+    color: unset;
+  }
+}

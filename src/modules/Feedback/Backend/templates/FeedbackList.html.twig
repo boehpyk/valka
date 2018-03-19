@@ -1,0 +1,149 @@
+<h1>Раздел &laquo;{{ article.title }}&raquo;</h1>
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <ol class="breadcrumb">
+            {{ path | raw }}
+        </ol>
+    </div>
+</div>
+
+
+<form enctype="multipart/form-data" method="post" name="mainForm" id="mainForm">
+    <div class="panel panel-default">
+        <div class="panel-heading"><a href="javascript:;" data-toggle="collapse" data-target="#params" class="toggle-block" data-params="params">Параметры <span class="caret-right" id="paramsCaret"></span></a></div>
+        <div class="panel-body collapse" id="params">
+            <table class="text-parts-table table table-bordered">
+                <tr>
+                    <td class="active">Тип</td>
+                    <td>Список отзывов</td>
+                </tr>
+                <tr>
+                    <td class="active">Заголовок</td>
+                    <td><input type="text" class="form-control" name="title" id="title" placeholder="Заголовок" value="{{ article.title }}" /></td>
+                </tr>
+                <tr>
+                    <td class="active">Служебное имя</td>
+                    <td><input type="text" name='service_name' id='service_name' value='{{ article.service_name }}'  class="form-control" disabled /></td>
+                </tr>
+                <tr>
+                    <td class="active">Публикация на сайте</td>
+                    <td>
+                        <select name="publish" id='publish' class="form-control">
+                            <option value="no" >Нет</option>
+                            <option value="yes" {% if article.publish == 'yes' %}selected{% endif %}>Да</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="active">Участие в основном меню</td>
+                    <td><select name="menu" id='menu' class="form-control">
+                            <option value="no">Нет</option>
+                            <option value="yes" {% if article.menu == 'yes' %}selected{% endif %}>Да</option>
+                        </select>
+                        &nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="active">Дата добавления на сайт</td>
+                    <td>{{ article.date_add | date('d.m.Y') }}</td>
+                </tr>
+
+                <tr>
+                    <td class="active">Дата последнего обновления</td>
+                    <td>{{ article.date_update | date('d.m.Y') }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading"><a href="javascript:;" data-toggle="collapse" data-target="#seo" class="toggle-block" data-params="seo">SEO <span class="caret-right" id="seoCaret"></span></a></div>
+        <div class="panel-body collapse" id="seo">
+            <table class="text-parts-table table table-bordered">
+                <tr>
+                    <td class="active">Meta keywords</td>
+                    <td><textarea name='meta_keywords' id='meta_keywords' class="form-control" rows="2">{{ article.meta_keywords }}</textarea></td>
+                </tr>
+                <tr>
+                    <td class="active">Meta description</td>
+                    <td><textarea name='meta_description' id='meta_description' class="form-control" rows="2">{{ article.meta_description }}</textarea></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <a href="javascript:;" data-toggle="collapse" data-target="#text" class="toggle-block" data-params="text">
+                Текст на странице "Отзывы"
+                <span class="caret-right" id="textCaret"></span>
+            </a>
+        </div>
+        <div class="panel-body collapse" id="text">
+
+            <textarea name="main_text" id="main_text" id='main_text' class="mceEditor form-control" type="textarea"  style="width:100%; height:350px">{{ article.main_text }}</textarea>
+
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Список отзывов</div>
+
+        <div class="panel-body" id="subdeps">
+            <table class="subdeps table">
+                <tr>
+                    <th class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Дата</th>
+                    <th class="col-lg-8 col-md-8 col-sm-8 col-xs-8">Заголовок</th>
+                    <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1" title="Публиковать"><span class="glyphicon glyphicon-ok publish-th"></span></th>
+                    <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1" title="Удалить"><span class="glyphicon glyphicon-remove delete-th"></span></th>
+                </tr>
+                {% for item in itemslist %}
+                    <tr>
+                        <td>{{ item.date | date('d.m.Y') }}</td>
+                        <td><a href="{% if global.debug %}/index_dev.php{% endif %}/admin/article/{{ item.id }}/">{{ item.title }}</a></td>
+                        <td><input value="yes" name="sub_publish[{{ item.id }}]" type="checkbox" class="subdep-manage"  data-role="publish" {% if item.publish == 'yes' %}checked{% endif %}></td>
+                        <td><input value="yes" name="delete[{{ item.id }}]" type="checkbox" class="subdep-manage" class="subdep-manage" data-role="delete" /></td>
+                        <input type="hidden" name="exists[{{ item.id }}]" value="yes" />
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td><input type="checkbox" class="select-all" data-target="publish" /></td>
+                    <td><input type="checkbox" class="select-all" data-target="delete" /></td>
+                </tr>
+            </table>
+
+            <!-- BEGIN navigation -->
+            {{ navigation | raw }}
+            <!-- END navigation -->
+
+        </div>
+    </div>
+
+    <input type="hidden" name="article_id" id='article_id' value="{{ article.id }}">
+    <input type="hidden" name="parent_id" id='parent_id' value="{{ article.id }}">
+
+    <input type="hidden" name="Update" value="Update">
+    <button id="submit_btn" class="btn btn-primary" onClick="return ConfirmDelete()">Внести изменения</button>
+
+</form>
+
+
+<br /><br /><br />
+
+<h1>ДОБАВИТЬ ОТЗЫВ</h1>
+<!--start форма для создания нового раздела start-->
+<form enctype="multipart/form-data" method="post" class="add-form">
+
+    <div class="form-group panel panel-info">
+        <div class="panel-heading">
+            <label for="title">Отзыв</label>
+            <textarea name="question" id="question" placeholder="Отзыв" class="form-control"></textarea>
+        </div>
+    </div>
+    <input value="добавить" class="btn btn-primary" name="Add" type="submit">
+
+    <input type="hidden" name="parent_id" value="{{ article.id }}">
+    <input type="hidden" name="article_id" value="{{ article.id }}">
+</form>
