@@ -11,6 +11,7 @@ use Silex\Provider\HttpCacheServiceProvider;
 use Silex\Provider\ValidatorServiceProvider;
 use Silex\Provider\MonologServiceProvider;
 use Silex\Provider\WebProfilerServiceProvider;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\PlaintextPasswordEncoder;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Silex\Provider\TwigServiceProvider;
@@ -113,6 +114,10 @@ class Application extends SilexApplication
                 'profiler.mount_prefix' => '/_profiler', // this is the default
             ));
         }
+        $app['request'] = function() use($app) {
+            return $app['request_stack']->getCurrentRequest();
+        };
+
         $app->mount('', new ControllerProvider());
     }
     public function getRootDir()

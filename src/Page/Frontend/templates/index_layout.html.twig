@@ -227,12 +227,9 @@
                 </a>
             </div>
             <nav id="nav" class="nav">
-                <a href="#" class="nav__item link-default">УСЛУГИ</a>
-                <a href="#" class="nav__item link-default">ЦЕНЫ</a>
-                <a href="#" class="nav__item link-default">ГАЛЕРЕЯ</a>
-                <a href="#" class="nav__item link-default">ПРАВОВАЯ БАЗА</a>
-                <a href="#" class="nav__item link-default">БЛОГ</a>
-                <a href="#" class="nav__item link-default">ОТЗЫВЫ</a>
+                {% for menuitem in mainmenu %}
+                    <a href="{% if global.debug %}/index_dev.php{% endif %}{{ menuitem.url }}" class="nav__item link-default">{{ menuitem.title }}</a>
+                {% endfor %}
             </nav>
         </div>
     </div>

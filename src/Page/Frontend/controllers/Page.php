@@ -12,7 +12,7 @@ abstract class Page
 {
     protected $article_id;
     protected $article_info;
-    protected $forbidden_types = array('Event', 'FirstPage', 'News');
+    protected $forbidden_types = array('Event', 'FirstPage', 'News', 'Feedback');
     protected $common_links;
     private $root_deps = array();
 
@@ -156,11 +156,26 @@ abstract class Page
 
     protected function getSubdeps()
     {
+        $res = array();
         $sql ="SELECT Page.id, Page.title, Page.url from Page WHERE Page.parent_id=:id AND Page.publish='yes' ORDER BY Page.position";
         $stmt = $this->app['db']->prepare($sql);
         $stmt->bindValue(':id', $this->article_id, PDO::PARAM_INT);
         $stmt->execute();
-        return $stmt->fetchAll();
+        while ($row = $stmt->fetch()) {
+            $row['listimage'] = $this->getFirstGalleryImage($row["id"]);
+            $res[] = $row;
+        }
+        return $res;
+    }
+
+    private function getFirstGalleryImage($id)
+    {
+        $sql ="SELECT filename from GalleryPhoto WHERE gallery_id=:id AND publish='yes' ORDER BY position LIMIT 1";
+        $stmt = $this->app['db']->prepare($sql);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchColumn();
+
     }
 
 

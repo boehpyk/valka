@@ -22,6 +22,9 @@ $(document).ready(function() {
 
     $('.data-fancybox').fancybox();
 
+    $("[data-fancybox]").fancybox();
+
+
     $( "#photo-slider .photo__slide" ).on( "click", function() {
         $(this).find('.data-fancybox').triggerHandler('click');
     });

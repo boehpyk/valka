@@ -36,10 +36,10 @@ class Text extends Page
             else {
                 $subdeps = false;
             }
+
             $content = $this->app['twig']->render('modules/Text/Frontend/templates/Text.html.twig', array(
                 'article'               => $this->article_info,
                 'photos'                => $this->getPhotos(),
-                'right_image_exists'    => file_exists($request->server->get('DOCUMENT_ROOT').'/uplds/'.$this->article_id.'/rightcolimage'.$this->article_id.'.jpg'),
                 'subdeps'               => (($subdeps !== false && is_array($subdeps) && count($subdeps) > 0) ? $subdeps : false)
             ));
             return $this->showAction($content, $this->article_info);

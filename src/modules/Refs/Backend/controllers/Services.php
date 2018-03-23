@@ -6,11 +6,11 @@ use App\Application;
 use PDO;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Page\Repository\PageRepository;
+use Page\Repository\ServicesRepository;
 use Page\Backend\controllers\Page;
 use Util\Util;
 
-class EventType extends Page
+class Services extends Page
 {
     protected $article_id;
     protected $app;
@@ -27,7 +27,7 @@ class EventType extends Page
     {
         if ($request->request->has('article_id') && (int)$request->request->get('article_id') > 0) {
             $this->article_id = $request->request->get('article_id');
-            $repo = new EventTypeRepository($this->app, $this->article_id);
+            $repo = new ServicesRepository($this->app, $this->article_id);
             $this->article_info = $repo->getPageInfo();
         }
         else {
@@ -36,15 +36,15 @@ class EventType extends Page
 
         if ($request->request->has('Update')) {
             $this->updateAction($request);
-            return  new RedirectResponse((($this->app['debug']) ? '/index_dev.php' : null).'/admin/refs/event_type/');
+            return  new RedirectResponse((($this->app['debug']) ? '/index_dev.php' : null).'/admin/refs/services/');
         }
         elseif ($request->request->has('Add')) {
             $this->addAction($request);
-            return  new RedirectResponse((($this->app['debug']) ? '/index_dev.php' : null).'/admin/refs/event_type/');
+            return  new RedirectResponse((($this->app['debug']) ? '/index_dev.php' : null).'/admin/refs/services/');
         }
         elseif ($request->request->has('deleteArticle')) {
             $this->deleteAction($request);
-            return  new RedirectResponse((($this->app['debug']) ? '/index_dev.php' : null).'/admin/refs/event_type');
+            return  new RedirectResponse((($this->app['debug']) ? '/index_dev.php' : null).'/admin/refs/services/');
         }
         else {
             return $this->showForm();
@@ -58,16 +58,16 @@ class EventType extends Page
 
         }
         else {
-            $content = $this->app['twig']->render('modules/Refs/Backend/templates/EventType/EventTypeList.html.twig', array(
-                'eventtypes' => $this->eventTypesList()
+            $content = $this->app['twig']->render('modules/Refs/Backend/templates/Services/ServicesList.html.twig', array(
+                'services' => $this->servicesList()
             ));
         }
         return $this->formAction($content);
     }
 
-    function eventTypesList()
+    function servicesList()
     {
-        $sql = "SELECT * FROM EventType";
+        $sql = "SELECT * FROM RefServices";
         $stmt = $this->app['db']->prepare($sql);
         $stmt->execute();
         $eventtypes = array();
@@ -84,17 +84,17 @@ class EventType extends Page
     private function updateAction($request)
     {
         if ($this->article_id) {
-            $this->updateEventType($request);
+            $this->updateService($request);
         }
         else {
-            $this->updateEventTypes($request);
+            $this->updateServices($request);
         }
     }
 
-    function updateEventTypes(Request $request)
+    function updateServices(Request $request)
     {
         if ($request->request->has("exists") && count($request->request->get("exists")) > 0) {
-            $sql = "UPDATE EventType SET publish='no' WHERE id=:id";
+            $sql = "UPDATE RefServices SET publish='no' WHERE id=:id";
             $stmt = $this->app['db']->prepare($sql);
             foreach ($_POST["exists"] as $key=>$value) {
                 if ($value == 'yes') {
@@ -104,7 +104,7 @@ class EventType extends Page
             }
         }
         if ($request->request->has("sub_publish") && count($request->request->get('sub_publish') > 0)) {
-            $sql = "UPDATE EventType SET publish='yes' WHERE id=:id";
+            $sql = "UPDATE RefServices SET publish='yes' WHERE id=:id";
             $stmt = $this->app['db']->prepare($sql);
             foreach ($request->request->get('sub_publish') as $key=>$value) {
                 if ($value == 'yes') {
@@ -115,7 +115,7 @@ class EventType extends Page
         }
 
         if ($request->request->has("sub_title") && count($request->request->get('sub_title') > 0)) {
-            $sql = "UPDATE EventType SET title=:title WHERE id=:id";
+            $sql = "UPDATE RefServices SET title=:title WHERE id=:id";
             $stmt = $this->app['db']->prepare($sql);
             foreach ($request->request->get('sub_title') as $key=>$value) {
                 if (strlen(strip_tags($value)) > 0) {
@@ -129,7 +129,7 @@ class EventType extends Page
         if ($request->request->has("delete") && count($request->request->get('delete')) > 0) {
             foreach ($request->request->get('delete') as $key=>$value) {
                 if ($value == 'yes') {
-                    $this->deleteEventType($key);
+                    $this->deleteService($key);
                 }
             }
         }
@@ -139,7 +139,7 @@ class EventType extends Page
     {
 
         $sql = "INSERT INTO 
-                            EventType (
+                            RefServices (
                               title 
                             ) 
                       VALUES (
@@ -153,9 +153,9 @@ class EventType extends Page
         $stmt->execute();
     }
 
-    public function deleteEventType($id)
+    public function deleteService($id)
     {
-        $sql = "DELETE FROM EventType WHERE id=:id";
+        $sql = "DELETE FROM RefServices WHERE id=:id";
         $stmt = $this->app['db']->prepare($sql);
         $stmt->bindValue("id", $id, PDO::PARAM_INT);
         $stmt->execute();

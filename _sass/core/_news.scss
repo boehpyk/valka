@@ -1,0 +1,13 @@
+.news {
+  width: 100%;
+}
+.news__item {
+  width: 100%;
+  position: relative;
+  border-bottom: solid 1px $color-milk;
+  padding: 15px;
+  margin-bottom: 15px;
+  .news__date {
+    font-size: 22px;
+  }
+}

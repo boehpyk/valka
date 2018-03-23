@@ -98,7 +98,7 @@ class News extends Page
             $stmt->bindValue("date", date('Y-m-d', strtotime($request->request->get('date'))));
             $stmt->bindValue('id', $this->article_id);
             $stmt->execute();
-            $this->manageFPImage($request);
+//            $this->manageFPImage($request);
         }
 
     }

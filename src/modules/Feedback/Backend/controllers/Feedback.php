@@ -95,6 +95,13 @@ class Feedback extends Page
             $stmt->bindValue("date", date('Y-m-d', strtotime($request->request->get('date'))));
             $stmt->bindValue('id', $this->article_id);
             $stmt->execute();
+
+            $sql = "UPDATE Page SET title=:title WHERE id=:id";
+            $stmt = $this->app['db']->prepare($sql);
+            $stmt->bindValue("title", Util::makeLidByWords(strip_tags($request->request->get('question'))), PDO::PARAM_STR);
+            $stmt->bindValue('id', $this->article_id, PDO::PARAM_INT);
+            $stmt->execute();
+
         }
 
     }

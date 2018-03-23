@@ -11,7 +11,7 @@ namespace Page\Repository;
 use PDO;
 
 
-class EventTypeRepository
+class ServicesRepository
 {
     function __construct($app, int $id)
     {
@@ -21,7 +21,7 @@ class EventTypeRepository
 
     public function getPageInfo()
     {
-        $sql = "SELECT * from EventType WHERE id=:id";
+        $sql = "SELECT * from RefServices WHERE id=:id";
         $stmt = $this->app['db']->prepare($sql);
         $stmt->bindValue(':id', $this->article_id, PDO::PARAM_INT);
         $stmt->execute();

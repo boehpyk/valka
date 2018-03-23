@@ -1,5 +1,7 @@
 @charset "UTF-8";
 
+@import './bootstrap/scss/bootstrap-grid';
+
 // Default Variables
 
 // Slick icon entity codes outputs the following
@@ -245,6 +247,13 @@ $slick-opacity-not-active: 0.25 !default;
             content: '';
         }
     }
+    .slick-slide {
+        max-height: 400px;
+        img {
+            height: 400px;
+            width: auto;
+        }
+    }
 }
 
 .reviews__slider {
@@ -254,6 +263,9 @@ $slick-opacity-not-active: 0.25 !default;
         width: 55px;
         z-index: 100;
         margin-top: -30px;
+        @include media-breakpoint-down(sm) {
+            top: -15px !important;
+        }
     }
 
     .slick-prev {

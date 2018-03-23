@@ -2,23 +2,15 @@
     <div class="container">
         <div class="row no-gutters">
 
-            <h2 class="title">{{ article.title }}</h2>
+            <h2 class="title">Блог</h2>
 
+            <h3>{{ article.title }}</h3>
+
+            <div class="clearfix"></div>
+
+            <p><b>{{ article.date | date('d.m.Y') }}</b></p>
 
             {{ article.main_text | raw }}
-
-
-            {% if subdeps != false and subdeps | length > 0 %}
-                <div class="right-col-gallery">
-                    {% for subdep in subdeps %}
-                        <div class="gallery-item effect-milo">
-                            <a href="{% if global.debug %}/index_dev.php{% endif %}{{ subdep.url }}"><img src="/uplds/{{ subdep.id }}/gallery/sm_{{ subdep.listimage }}" border="0" /></a>
-                            <h2><a href="{% if global.debug %}/index_dev.php{% endif %}{{ subdep.url }}">{{ subdep.title }}</a></h2>
-                        </div>
-                    {% endfor %}
-                </div>
-            {% endif %}
-
 
             {% if photos | length > 0 %}
                 <div class="right-col-gallery">

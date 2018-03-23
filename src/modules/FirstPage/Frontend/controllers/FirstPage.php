@@ -5,10 +5,13 @@ namespace modules\FirstPage\Frontend\controllers;
 use App\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Page\Frontend\controllers\Page;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class FirstPage extends Page
 {
     protected $article_info;
+
+    private $errors = array();
 
     function __construct($article_id, Application $app)
     {
@@ -17,70 +20,129 @@ class FirstPage extends Page
         $this->article_id = $article_id;
     }
 
-    public function handle()
+    public function handle(Request $request)
     {
+        if ($request->request->has('Send')) {
+            $this->handleOrder($request);
+        }
         $content = $this->app['twig']->render('modules/FirstPage/Frontend/templates/FirstPage.html.twig', array(
             'article'       => $this->article_info,
-            'events'        => $this->eventList(),
-            'cite'          => $this->getCite(),
-            'common_links'  => $this->common_links
+            'feedbacks'     => $this->feedbackList(),
+            'lastphotos'    => $this->getLastPhotos(),
+            'services'      => $this->getServices(),
+            'errors'        => $this->errors
         ));
         return $this->showAction($content);
     }
 
-    private function eventList()
+    private function feedbackList()
     {
         $sql = "SELECT 
-                  Page.id, 
-                  Page.title, 
-                  Page.url,
-                  Event.datebegin, 
-                  Event.lid, 
-                  EventType.title as type_title 
+                  Feedback.question, 
+                  Feedback.name 
                 FROM 
                   Page, 
-                  Event, 
-                  EventType 
+                  Feedback
                 WHERE 
                   Page.publish='yes' 
                 AND 
-                  Event.id=Page.id
-                AND 
-                  Event.type_id!=2 
-                AND 
-                  EventType.id=Event.type_id
+                  Feedback.id=Page.id
                 ORDER BY 
-                  Event.datebegin DESC
-                LIMIT ".(($this->article_info['events_num'] !== null) ? $this->article_info['events_num'] : 0);
+                  Feedback.date DESC
+                LIMIT 10";
 
         $stmt = $this->app['db']->prepare($sql);
         $stmt->execute();
-        $events = array();
-        while ($row = $stmt->fetch()) {
-            $row['img_exists'] = file_exists($_SERVER['DOCUMENT_ROOT'].'/uplds/'.$row['id'].'/fp_image_'.$row['id'].'.jpg');
-            $events[] = $row;
-        }
-        return $events;
-
-        return $events;
+        return $stmt->fetchAll();
 
     }
 
-    private function getCite()
+    private function getLastPhotos()
     {
-        $sql="SELECT text FROM Cite ORDER BY RAND() LIMIT 1";
+        $sql="SELECT gallery_id, filename, title FROM GalleryPhoto ORDER BY id DESC LIMIT 10";
         $stmt = $this->app['db']->query($sql);
-        $res =  $stmt->fetchAll();
-        if (count($res) > 0) {
-            $item = $res[0];
-            return $item['text'];
-        }
-        return '';
+        return $stmt->fetchAll();
     }
+
+    private function getServices()
+    {
+        $sql="SELECT id, title FROM RefServices WHERE publish='yes'";
+        $stmt = $this->app['db']->query($sql);
+        return $stmt->fetchAll();
+    }
+
+    private function handleOrder(Request $request)
+    {
+        if ($this->checkForm($request)) {
+            $this->addOrder($request);
+            $this->sendEmail($request);
+            $this->app['session']->getFlashBag()->add('message', array('type' => 'success', 'content' => '<p><b>Спасибо за заказ!</b></p><p>В ближайшее время наш менеджер свяжется с Вами!</p>'));
+            return new RedirectResponse((($this->app['debug']) ? '/index_dev.php' : null) . '/');
+        }
+        else {
+            $err_str = '';
+            foreach ($this->errors as $error) {
+                $err_str .= $error.'<br />';
+            }
+            $this->app['session']->getFlashBag()->add('message', array('type' => 'danger', 'content' => '<p><b>При заполнениее формы произошли следующие ошибки:</b></p><p>'.$err_str.'</p>'));
+//            return new RedirectResponse((($this->app['debug']) ? '/index_dev.php' : null) . '/');
+        }
+    }
+
+    private function addOrder(Request $request)
+    {
+        $sql = "INSERT INTO 
+                            Order (
+                              name, 
+                              email, 
+                              phone, 
+                              date, 
+                              type_id, 
+                              description
+                            ) 
+                      VALUES (
+                          :name, 
+                          :email,
+                          :phone, 
+                          NOW(), 
+                          :type_id, 
+                          :description, 
+                        )";
+
+
+        $stmt = $this->app['db']->prepare($sql);
+        $stmt->bindValue(':name', $request->request->get('name'), PDO::PARAM_STR);
+        $stmt->bindValue(':email', $request->request->get('email'), PDO::PARAM_STR);
+        $stmt->bindValue(':phone', $request->request->get('phone'), PDO::PARAM_STR);
+        $stmt->bindValue(':type_id', $request->request->get("type_id"), PDO::PARAM_INT);
+        $stmt->bindValue(':description', $request->request->get('description'), PDO::PARAM_STR);
+        $stmt->execute();
+
+        $id = $this->app['db']->lastInsertId();
+
+    }
+
+    private function checkForm(Request $request)
+    {
+        if (!$request->request->has('name') or strlen(strip_tags($request->request->get('name'))) == 0) {
+            $this->errors[] = '"Имя" - обязательное поле. Введите значение';
+
+        }
+        if ((!$request->request->has('email') or strlen(strip_tags($request->request->get('email'))) == 0) && (!$request->request->has('phone') or strlen(strip_tags($request->request->get('phone'))) == 0) ) {
+            $this->errors[] = 'Введите значение в поля "E-mail" или "Телефон"';
+
+        }
+        if (count($this->errors) > 0) {
+            return false;
+        }
+
+        return true;
+    }
+
 
 
     public function getPageTitle()
     {
-        return 'Литературно-мемориальный музей Ф.М. Достоевского';
+        return 'Валка деревьев сложных и не очень';
     }
 }

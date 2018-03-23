@@ -4,7 +4,6 @@
 <ul class="nav nav-tabs" role="tablist"><ul class="nav nav-tabs" role="tablist">
         <li role="presentation"><a href="/{% if app.debug == true %}index_dev.php/{% endif %}admin/article/{{ article.id }}/">Текст и общие параметры</a></li>
         <li role="presentation" class="active"><a href="/{% if app.debug == true %}index_dev.php/{% endif %}admin/gallery/{{ article.id }}/">Фотогалерея</a></li>
-        <li role="presentation"><a href="/{% if app.debug == true %}index_dev.php/{% endif %}admin/rightcol/{{ article.id }}/">Правая колонка</a></li>
     </ul>
     <form enctype="multipart/form-data" method="post" name="mainForm" id="mainForm">
 

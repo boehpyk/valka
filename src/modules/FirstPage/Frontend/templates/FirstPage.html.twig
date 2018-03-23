@@ -110,14 +110,9 @@
             <h2 class="title">ПОСЛЕДНИЕ ФОТО</h2>
 
             <div id="photo-slider" class="photo__slider slider js_slider">
-                <div class="photo__slide js_slide"><a href="/assets/pctrs/slide-1.jpg" class="data-fancybox" data-fancybox="group" data-caption="My caption"><img src="/assets/pctrs/slide-1.jpg" alt=""></a></div>
-                <div class="photo__slide js_slide"><a href="/assets/pctrs/slide-2.jpg" class="data-fancybox" data-fancybox="group" data-caption="My caption"><img src="/assets/pctrs/slide-2.jpg" alt=""></a></div>
-                <div class="photo__slide js_slide"><a href="/assets/pctrs/slide-3.jpg" class="data-fancybox" data-fancybox="group" data-caption="My caption"><img src="/assets/pctrs/slide-3.jpg" alt=""></a></div>
-                <div class="photo__slide js_slide"><a href="/assets/pctrs/slide-4.jpg" class="data-fancybox" data-fancybox="group" data-caption="My caption"><img src="/assets/pctrs/slide-4.jpg" alt=""></a></div>
-                <div class="photo__slide js_slide"><a href="/assets/pctrs/slide-1.jpg" class="data-fancybox" data-fancybox="group" data-caption="My caption"><img src="/assets/pctrs/slide-1.jpg" alt=""></a></div>
-                <div class="photo__slide js_slide"><a href="/assets/pctrs/slide-2.jpg" class="data-fancybox" data-fancybox="group" data-caption="My caption"><img src="/assets/pctrs/slide-2.jpg" alt=""></a></div>
-                <div class="photo__slide js_slide"><a href="/assets/pctrs/slide-3.jpg" class="data-fancybox" data-fancybox="group" data-caption="My caption"><img src="/assets/pctrs/slide-3.jpg" alt=""></a></div>
-                <div class="photo__slide js_slide"><a href="/assets/pctrs/slide-4.jpg" class="data-fancybox" data-fancybox="group" data-caption="My caption"><img src="/assets/pctrs/slide-4.jpg" alt=""></a></div>
+                {% for lastphoto in lastphotos %}
+                <div class="photo__slide js_slide"><a href="/uplds/{{ lastphoto.gallery_id }}/gallery/{{ lastphoto.filename }}" class="data-fancybox" data-fancybox="group" data-caption="{{ lastphoto.title }}"><img src="/uplds/{{ lastphoto.gallery_id }}/gallery/{{ lastphoto.filename }}" alt=""></a></div>
+                {% endfor %}
             </div>
 
         </div>
@@ -163,41 +158,16 @@
 
             <div id="reviews-slider" class="reviews__slider slider js_slider">
 
+                {% for feedback in feedbacks %}
                 <div class="reviews__slide js_slide">
                     <div class="reviews__message">
                         <span>
-                          Команда выполнила задачу по удалению двух старых деревьев,
-                          расположенных рядом с домом, быстро и очень умело.<br>
-                          Я так долго морально готовилась к этому событию, а на деле все оказалось не так страшно.
-                          Дело мастера боится!
+                            {{ feedback.question }}
                         </span>
                     </div>
-                    <div class="reviews__author">Екатерина, владелец дачного участка </div>
+                    <div class="reviews__author">{{ feedback.name }}</div>
                 </div>
-
-                <div class="reviews__slide js_slide">
-                    <div class="reviews__message">
-                        <span>
-                          Команда выполнила задачу по удалению двух старых деревьев,
-                          расположенных рядом с домом, быстро и очень умело.<br>
-                          Я так долго морально готовилась к этому событию, а на деле все оказалось не так страшно.
-                          Дело мастера боится!
-                        </span>
-                    </div>
-                    <div class="reviews__author">Екатерина, владелец дачного участка </div>
-                </div>
-
-                <div class="reviews__slide js_slide">
-                    <div class="reviews__message">
-                        <span>
-                          Команда выполнила задачу по удалению двух старых деревьев,
-                          расположенных рядом с домом, быстро и очень умело.<br>
-                          Я так долго морально готовилась к этому событию, а на деле все оказалось не так страшно.
-                          Дело мастера боится!
-                        </span>
-                    </div>
-                    <div class="reviews__author">Екатерина, владелец дачного участка </div>
-                </div>
+                {% endfor %}
 
             </div>
     </div>
@@ -215,39 +185,68 @@
                     <div class="form__item">
                         <label class="form__label">Имя: </label>
                         <label class="form__custom-border">
-                            <input class="form__input" type="text" placeholder="Введите имя">
+                            <input class="form__input" type="text" name="name" value="{{ app.request.request.get('name') }}" placeholder="Введите имя">
                         </label>
                         <label class="form__label">Телефон: </label>
                         <label class="form__custom-border">
-                            <input id="phone-input" class="form__input" type="tel" placeholder="+7 (_ _ _) _ _ _ -_ _- _ _">
+                            <input id="phone-input" class="form__input" name="phone" type="tel" placeholder="+7 (_ _ _) _ _ _ -_ _- _ _">
                         </label>
                         <label class="form__label">E-mail: </label>
                         <label class="form__custom-border">
-                            <input class="form__input" type="email" placeholder="Введите электронный адрес">
+                            <input class="form__input" type="email" name="email" placeholder="Введите электронный адрес">
                         </label>
                         <label class="form__label">Виды работ:</label>
                         <label class="form__custom-border">
                             <div class="form__triangle"></div>
-                            <select class="form__select">
-                                <option>Валка деревьев1</option>
-                                <option>Валка деревьев2</option>
-                                <option>Валка деревьев3</option>
+                            <select class="form__select" name="service_id">
+                                {% for service in services %}
+                                <option value="{{ service.id }}">{{ service.title }}</option>
+                                {% endfor %}
                             </select>
                         </label>
                     </div>
                     <div class="form__item">
                         <label class="form__label">Если есть фото: </label>
-                        <input class="form__file-input" type="file" name="photos" accept=".jpg, .png, .bmp">
-                        <input class="form__file-input form__file-input_hidden-sm" type="file" name="photos" accept=".jpg, .png, .bmp">
-                        <input class="form__file-input form__file-input_hidden-sm" type="file" name="photos" accept=".jpg, .png, .bmp">
+                        <input class="form__file-input" type="file" name="photos[]" accept=".jpg, .png, .bmp">
+                        <input class="form__file-input form__file-input_hidden-sm" type="file" name="photos[]" accept=".jpg, .png, .bmp">
+                        <input class="form__file-input form__file-input_hidden-sm" type="file" name="photos[]" accept=".jpg, .png, .bmp">
                         <label class="form__label">Описание проблемы: </label>
                         <label class="form__custom-border form__custom-border_fixed-height">
-                            <textarea class="form__textarea" maxlength="500" placeholder="Нужно свалить сосну высотой с двухэтажный дом."></textarea>
+                            <textarea class="form__textarea" maxlength="500" name="description" placeholder="Нужно свалить сосну высотой с двухэтажный дом."></textarea>
                         </label>
                     </div>
                 </div>
-                <button class="large-button" type="submit">РАССЧИТАТЬ СТОИМОСТЬ</button>
+                <button class="large-button" type="submit" name="Send">РАССЧИТАТЬ СТОИМОСТЬ</button>
             </div>
         </form>
     </div>
 </section>
+
+{# Check if we got a session without creating one #}
+{#{% if app.request.hasPreviousSession %}#}
+    {# Check if we got some flash messages #}
+    {% if app.session.flashbag.peekAll()|length > 0 %}
+        <div id="hidden-content" style="display: none;">
+            {% for message in app.session.getFlashBag.get('message') %}
+                <div class="alert alert-{{ message.type }}" >
+                    {{ message.content }}
+                </div>
+            {% endfor %}
+        </div>
+        <script>
+            $(document).ready(function() {
+                $.fancybox.open({
+                    src  : '#hidden-content',
+                    type : 'inline',
+                    opts : {
+                        afterShow : function( instance, current ) {
+                            console.info( 'done!' );
+                        }
+                    }
+                });
+            });
+        </script>
+
+    {% endif %}
+{#{% endif %}#}
+

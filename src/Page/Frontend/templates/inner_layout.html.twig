@@ -7,6 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lesopoval</title>
     <link href="/assets/stlshts/app.css" rel="stylesheet" />
+    <link href="/assets/stlshts/vendor/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+    <script type=text/javascript src="/assets/jvscrpts/vendor/jquery-1.12.0.min.js"></script>
+
 </head>
 
 <body>
@@ -222,7 +226,7 @@
             </div>
             <nav id="nav" class="nav">
                 {% for menuitem in mainmenu %}
-                <a href="{{ menuitem.url }}" class="nav__item link-default">{{ menuitem.title }}</a>
+                <a href="{% if global.debug %}/index_dev.php{% endif %}{{ menuitem.url }}" class="nav__item link-default{% if menuitem.id == article.id or menuitem.id == article.root_id %} active{% endif %}">{{ menuitem.title }}</a>
                 {% endfor %}
             </nav>
         </div>
@@ -337,8 +341,11 @@
 
 </div>
 
-{#<script type=text/javascript src="/assets/jvscrpts/main.cc96987ec8b6328c4cb1.js"></script>#}
+<script type=text/javascript src="/assets/jvscrpts/vendor/jquery.fancybox.min.js"></script>
+<script type=text/javascript src="/assets/jvscrpts/vendor/slick.min.js"></script>
+
 <script type=text/javascript src="/assets/jvscrpts/header.js"></script>
+<script type=text/javascript src="/assets/jvscrpts/main.js"></script>
 
 </body>
 

@@ -19,8 +19,8 @@ class Gallery extends Page
     private $size_big_width = 1080;
     private $size_big_height = 720;
 
-    private $size_small_width = 200;
-    private $size_small_height = 160;
+    private $size_small_width = 320;
+    private $size_small_height = 240;
 
 
     function __construct(Application $app, $id = null)

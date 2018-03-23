@@ -7,7 +7,7 @@
 
 
 
-    <h1>&laquo;Типы событий&raquo;</h1>
+    <h1>&laquo;Типы работ&raquo;</h1>
 
 <form enctype="multipart/form-data" method="post" name="mainForm" id="mainForm">
 
@@ -24,12 +24,12 @@
                     <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1" title="Публиковать"><span class="glyphicon glyphicon-ok publish-th"></span></th>
                     <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1" title="Удалить"><span class="glyphicon glyphicon-remove delete-th"></span></th>
                 </tr>
-            {% for eventtype in eventtypes %}
+            {% for service in services %}
                 <tr>
-                    <td class="col-lg-10 col-md-10 col-sm-10 col-xs-10"><input type="text" name='sub_title[{{ eventtype.id }}]' id='sub_title[{{ eventtype.id }}]' value='{{ eventtype.title }}' class="form-control" /></td>
-                    <td class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><input {{ eventtype.publish_checked }} value="yes" name="sub_publish[{{ eventtype.id }}]" type="checkbox" class="subdep-manage" data-role="publish" /></td>
-                    <td class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><input value="yes" name="delete[{{ eventtype.id }}]" type="checkbox" class="subdep-manage" data-role="delete" /></td>
-                    <input type="hidden" name="exists[{{ eventtype.id }}]" value="yes">
+                    <td class="col-lg-10 col-md-10 col-sm-10 col-xs-10"><input type="text" name='sub_title[{{ service.id }}]' id='sub_title[{{ service.id }}]' value='{{ service.title }}' class="form-control" /></td>
+                    <td class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><input {{ service.publish_checked }} value="yes" name="sub_publish[{{ service.id }}]" type="checkbox" class="subdep-manage" data-role="publish" /></td>
+                    <td class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><input value="yes" name="delete[{{ service.id }}]" type="checkbox" class="subdep-manage" data-role="delete" /></td>
+                    <input type="hidden" name="exists[{{ service.id }}]" value="yes">
                 </tr>
             {% endfor %}
             </table>
@@ -42,7 +42,7 @@
 </form>
 
 
-<h3>Добавить тип событий</h3>
+<h3>Добавить тип работ</h3>
 
 <form enctype="multipart/form-data" method="post" class="add-form" role="form">
     <div class="form-group panel panel-info">

@@ -29,11 +29,11 @@ function resize($file_input, $file_output, $w_o, $h_o, $percent = false) {
     $ext = $types[$type];
     if ($ext) {
     	$func = 'imagecreatefrom'.$ext;
-    	$img = $func($file_input);
+    	$img = @$func($file_input);
         $exif = @exif_read_data($file_input);
 //        var_dump($exif);
 //        exit;
-        if(!empty($exif['Orientation'])) {
+        if($exif && !empty($exif['Orientation'])) {
             switch($exif['Orientation']) {
                 case 8:
                     $img = imagerotate($img,90,0);

@@ -1,0 +1,25 @@
+<section class="services">
+    <div class="container">
+        <div class="row no-gutters">
+
+            <h2 class="title">{{ article.title }}</h2>
+
+
+            <div class="news">
+                {% for newsitem in newslist %}
+                    <div class="news__item">
+                        <div class="news__date">
+                            {{ newsitem.date | date('d.m.Y') }}
+                        </div>
+                        <div class="news__title">
+                            <a href="{% if global.debug %}/index_dev.php{% endif %}{{ newsitem.url }}">{{ newsitem.title }}</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+
+        </div>
+    </div>
+</section>
+

@@ -22,6 +22,7 @@ class ControllerProvider implements ControllerProviderInterface
 
         $controllers
             ->get('/', [$this, 'homepage'])
+            ->method('GET|POST')
             ->bind('homepage');
 
 
@@ -193,6 +194,7 @@ class ControllerProvider implements ControllerProviderInterface
                 $sth = $app['db']->executeQuery($sql, array('url' => '/'.trim($pageName, '\\').'/'));
 
                 $page = $sth->fetch();
+
                 if ($page) {
                     extract($page);
 
@@ -211,11 +213,12 @@ class ControllerProvider implements ControllerProviderInterface
         return $controllers;
     }
 
-    public function homepage(App $app)
+    public function homepage(App $app, Request $request)
     {
         $classname =  'modules\\FirstPage\\Frontend\\controllers\\FirstPage';
         $handler = new $classname(4, $app);
-        return $handler->handle();
+        $app['request'] = $request;
+        return $handler->handle($request);
     }
 
 

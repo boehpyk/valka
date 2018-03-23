@@ -315,7 +315,7 @@ final class Util {
     }
 
 
-    static function getMySQLLimit($page, $in_page)
+    static function getMySQLLimit($page, $in_page = 20)
     {
 
         if(!isset($page) or $page == 1) {
@@ -358,7 +358,9 @@ final class Util {
         $trans = array('sch','SCH','sh','SH','yo','YO','zh','ZH','ch','CH','e','E','yu','YU','ya','YA','a','b','v','g','d','e','z','i','j','k','l','m','n','o','p','r','s','t','u','f','h','c',"\"",'y',"",'A','B','V','G','D','E','Z','I','J','K','L','M','N','O','P','R','S','T','U','F','H','C',"_",'Y',"", "_", "_", "_", "_");
         $newstr = str_replace($rus,$trans,$str);
         //добавил Д. Аверков
-        $newstr = preg_replace("/\/|\\|\||\"|\'|\?|\*|\+|\&|\$|\,/", "", $newstr);
+//        $newstr = preg_replace("/\/|\\|\||\"|\'|\?|\*|\+|\&|\$|\,/", "", $newstr);
+        $newstr = preg_replace('/[^ \w]+/', "", $newstr);
+        $newstr = preg_replace('/[\-\s]+/', "_", $newstr);
         return $newstr;
     }
 

@@ -8,6 +8,7 @@
     margin: 0 5px;
     cursor: pointer;
     user-select: none;
+    max-height: 400px;
 
     &:after {
       position: absolute;
@@ -22,6 +23,11 @@
 
     &:hover:after {
       opacity: 0;
+    }
+
+    img {
+      height: 100%;
+      width: auto;
     }
 
   }

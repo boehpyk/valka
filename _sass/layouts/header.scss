@@ -67,13 +67,18 @@
     height: 60px;
     opacity: 0;
   }
+
+  a {
+    color: $color-orange;
+  }
+
 }
 
 .nav {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  padding-left: 35px;
+  //padding-left: 35px;
   transition: all $transition-medium;
 
   @include media-breakpoint-down(md) {
@@ -117,7 +122,7 @@
       }
     }
 
-    &:hover {
+    &:hover, &.active {
       color: $color-white;
 
       &:after {
