@@ -79,34 +79,6 @@ class ControllerProvider implements ControllerProviderInterface
             })->method('GET|POST');
 
         $controllers
-            ->match('/admin/rightcol/{id}/', function ($id, Request $request) use($app) {
-
-                $sql = "SELECT id, type FROM Page WHERE id = :id";
-                $sth = $app['db']->executeQuery($sql, array('id' => $id));
-                $page = $sth->fetch();
-
-                if (!$page) $app->abort(404, "Страница не найдена");
-
-                extract($page);
-
-                /**
-                 * @var $type string
-                 * @var $id integer
-                 */
-
-                $classFile = __DIR__."/../modules/RightCol/Backend/controllers/RightCol.php";
-                if(file_exists ($classFile)) {
-                    $classname = 'modules\\RightCol\\Backend\\controllers\\RightCol';
-                    $handler = new $classname($this->app, $id);
-                    return $handler->handle($request);
-                }
-                $app->abort(404, "Страница не найдена");
-
-            })->method('GET|POST');
-
-
-
-        $controllers
             ->match('/admin/browser/', function (Request $request) use($app) {
 
                 $classFile = __DIR__."/../Page/Backend/controllers/FileBrowser.php";
@@ -131,6 +103,20 @@ class ControllerProvider implements ControllerProviderInterface
                 $app->abort(404, "Страница не найдена");
 
             })->method('GET|POST');
+
+        $controllers
+            ->match('/admin/orders/', function (Request $request) use($app) {
+
+                $classFile = __DIR__."/../modules/Order/Backend/controllers/Order.php";
+                if(file_exists ($classFile)) {
+                    $classname = 'modules\\Order\\Backend\\controllers\\Order';
+                    $handler = new $classname($app, $request);
+                    return $handler->handle($request);
+                }
+                $app->abort(404, "Страница не найдена");
+
+            })->method('GET|POST');
+
 
 
         $controllers

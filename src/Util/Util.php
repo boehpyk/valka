@@ -544,8 +544,8 @@ final class Util {
 
         if ($crop && $_w_src == $w_aim && $_h_src == $h_aim) return;
 
-        $exif = exif_read_data($f);
-        if(!empty($exif['Orientation'])) {
+        $exif = @exif_read_data($f);
+        if(null !== $exif && !empty($exif['Orientation'])) {
             switch($exif['Orientation']) {
                 case 8:
                     $w_src = $_h_src;

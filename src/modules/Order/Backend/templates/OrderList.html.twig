@@ -1,0 +1,70 @@
+<style>
+    .change-year {
+        float: right;
+        margin: 4px;
+        min-width: 150px;
+    }
+</style>
+<script>
+    $(document).ready(function() {
+        $('.change-year').on('change', function () {
+            document.location.href = '{% if global.debug %}/index_dev.php{% endif %}/admin/orders/?archive=' + $(this).val();
+        })
+    });
+</script>
+
+
+<h1>&laquo;Заказы&raquo;</h1>
+
+<form enctype="multipart/form-data" method="post" name="mainForm" id="mainForm">
+
+    <button id="submit_btn2" class="btn btn-primary" onClick="return ConfirmDelete()">Внести изменения</button>
+
+    <br /><br />
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Заказы
+            <select class="change-year">
+                <option value="no">Необработанные</option>
+                <option value="yes"{% if app.request.query.get('archive') == 'yes' %} selected{% endif %}>Обработанные</option>
+            </select>
+
+        </div>
+        <div class="panel-body" id="subdeps">
+            <table class="subdeps table">
+                <tr>
+                    <th class="col-lg-2 col-md-2 col-sm-2 col-xs-2" >Дата</th>
+                    <th class="dep_title col-lg-8 col-md-8 col-sm-8 col-xs-8">Заказ</th>
+                    <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1" title="Обработан"><span class="glyphicon glyphicon-ok publish-th"></span></th>
+                    <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1" title="Удалить"><span class="glyphicon glyphicon-remove delete-th"></span></th>
+                </tr>
+                {% for order in orders %}
+                    <tr>
+                        <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2">{{ order.date | date('d.m.Y H:s') }}</td>
+                        <td class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                            <b>Имя:</b> {{ order.name }}<br />
+                            <b>E-mail:</b> {{ order.email }}<br />
+                            <b>Телефон:</b> {{ order.phone}}<br />
+                            <b>Тип работ:</b> {{ order.service }}<br />
+                            <b>Описание:</b> {{ order.description }}<br />
+                            <div style="margin: 15px 0; border: solid 1px #ededed; padding: 15px;">
+                                {% for image in order.images %}
+                                    <a href="/uplds/orderfiles/{{ order.id }}/{{ image.filename }}" target="_blank"><img src="/uplds/orderfiles/{{ order.id }}/{{ image.filename }}" border="0" style="max-width: 70px; height: auto; float: left; margin: 0 10px 10px 0;" /></a>
+                                {% endfor %}
+                                <div class="clearfix">
+                            </div>
+                        </td>
+                        <td class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><input value="yes" name="sub_handled[{{ order.id }}]" {% if order.handled == 'yes' %} checked{% endif %} type="checkbox" class="subdep-manage" data-role="handled" /></td>
+                        <td class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><input value="yes" name="delete[{{ order.id }}]" type="checkbox" class="subdep-manage" data-role="delete" /></td>
+                        <input type="hidden" name="exists[{{ order.id }}]" value="yes">
+                    </tr>
+                {% endfor %}
+            </table>
+
+        </div>
+    </div>
+
+    <input type="hidden" name="Update" value="Update" />
+    <button id="submit_btn" class="btn btn-primary" onClick="return ConfirmDelete()">Внести изменения</button>
+</form>

@@ -178,6 +178,19 @@ abstract class Page
 
     }
 
+    function getAdminEmail()
+    {
+        $sql = "SELECT value FROM settings WHERE name='admin_email'";
+        $stmt = $this->app['db']->query($sql);
+        $row = $stmt->fetch();
+        if(strlen($row['value']) > 0){
+            return $row['value'];
+        }
+        else{
+            return false;
+        }
+    }
+
 
     abstract function getPageTitle();
 

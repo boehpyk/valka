@@ -179,7 +179,7 @@
             <h2 class="title">РАССЧИТАТЬ СТОИМОСТЬ ЗАКАЗА</h2>
             <span class="form__subtitle">Заполните форму и мы свяжемся с вами в ближайшее время</span>
         </div>
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             <div class="row no-gutters">
                 <div class="form__flex">
                     <div class="form__item">
@@ -198,18 +198,18 @@
                         <label class="form__label">Виды работ:</label>
                         <label class="form__custom-border">
                             <div class="form__triangle"></div>
-                            <select class="form__select" name="service_id">
+                            <select class="form__select" name="service">
                                 {% for service in services %}
-                                <option value="{{ service.id }}">{{ service.title }}</option>
+                                <option value="{{ service.title }}">{{ service.title }}</option>
                                 {% endfor %}
                             </select>
                         </label>
                     </div>
                     <div class="form__item">
                         <label class="form__label">Если есть фото: </label>
-                        <input class="form__file-input" type="file" name="photos[]" accept=".jpg, .png, .bmp">
-                        <input class="form__file-input form__file-input_hidden-sm" type="file" name="photos[]" accept=".jpg, .png, .bmp">
-                        <input class="form__file-input form__file-input_hidden-sm" type="file" name="photos[]" accept=".jpg, .png, .bmp">
+                        <input class="form__file-input" type="file" name="photo[]" accept=".jpg, .png, .bmp, .jpeg, .gif">
+                        <input class="form__file-input form__file-input_hidden-sm" type="file" name="photo[]" accept=".jpg, .png, .bmp, .jpeg, .gif">
+                        <input class="form__file-input form__file-input_hidden-sm" type="file" name="photo[]" accept=".jpg, .png, .bmp, .jpeg, .gif">
                         <label class="form__label">Описание проблемы: </label>
                         <label class="form__custom-border form__custom-border_fixed-height">
                             <textarea class="form__textarea" maxlength="500" name="description" placeholder="Нужно свалить сосну высотой с двухэтажный дом."></textarea>
@@ -229,7 +229,7 @@
         <div id="hidden-content" style="display: none;">
             {% for message in app.session.getFlashBag.get('message') %}
                 <div class="alert alert-{{ message.type }}" >
-                    {{ message.content }}
+                    {{ message.content | raw }}
                 </div>
             {% endfor %}
         </div>
