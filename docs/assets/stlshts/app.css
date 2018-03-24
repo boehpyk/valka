@@ -2316,6 +2316,12 @@ h3 {
       color: #fff; }
       .nav__item:hover:after, .nav__item.active:after {
         height: 6px; }
+    @media (min-width: 992px) {
+      .nav__item.to-main {
+        display: none; } }
+    @media (min-width: 992px) {
+      .nav__item.to-main:after {
+        display: none; } }
   .header_position_not-top .nav:not(.nav_opened) {
     visibility: collapse;
     margin-top: -65px;
@@ -2324,7 +2330,7 @@ h3 {
     .nav:not(.nav_opened) {
       visibility: collapse;
       opacity: 0;
-      margin-top: -288px !important; } }
+      margin-top: -335px !important; } }
 
 .menu-icon {
   position: relative;

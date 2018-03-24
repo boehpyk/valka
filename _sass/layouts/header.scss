@@ -129,6 +129,16 @@
         height: 6px;
       }
     }
+    &.to-main {
+      @include media-breakpoint-up(lg) {
+        display: none;
+      }
+      &:after {
+        @include media-breakpoint-up(lg) {
+          display: none;
+        }
+      }
+    }
   }
 
   .header_position_not-top &:not(.nav_opened) {
@@ -141,7 +151,7 @@
     &:not(.nav_opened) {
       visibility: collapse;
       opacity: 0;
-      margin-top: -288px !important;
+      margin-top: -335px !important;
     }
   }
 }
