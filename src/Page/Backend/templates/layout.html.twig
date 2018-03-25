@@ -62,6 +62,12 @@
 
             </div>
         </div>
+
+        <h3>Заказы</h3>
+        <ul class="nav" id="side-menu">
+            <li><a href="/{% if app.debug == true %}index_dev.php/{% endif %}admin/orders/">Заказы</a></li>
+        </ul>
+
         <h3>Справочники</h3>
         <ul class="nav" id="side-menu">
             <li><a href="/{% if app.debug == true %}index_dev.php/{% endif %}admin/refs/services/">Виды услуг (для формы заказа)</a></li>

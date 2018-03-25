@@ -98,7 +98,7 @@
                 </div>
             </div>
 
-            <button class="large-button">ОТПРАВИТЬ ЗАЯВКУ</button>
+            <button class="large-button" onclick="location.href='#order';">ОТПРАВИТЬ ЗАЯВКУ</button>
 
         </div>
     </div>
@@ -145,7 +145,7 @@
                 <div class="work__line"></div>
             </div>
 
-            <button class="large-button">ОТПРАВИТЬ ЗАЯВКУ</button>
+            <button class="large-button" onclick="location.href='#order';">ОТПРАВИТЬ ЗАЯВКУ</button>
 
         </div>
     </div>
@@ -176,6 +176,7 @@
 <section class="form">
     <div class="container">
         <div class="row no-gutters">
+            <a name="order"></a>
             <h2 class="title">РАССЧИТАТЬ СТОИМОСТЬ ЗАКАЗА</h2>
             <span class="form__subtitle">Заполните форму и мы свяжемся с вами в ближайшее время</span>
         </div>
@@ -189,11 +190,11 @@
                         </label>
                         <label class="form__label">Телефон: </label>
                         <label class="form__custom-border">
-                            <input id="phone-input" class="form__input" name="phone" type="tel" placeholder="+7 (_ _ _) _ _ _ -_ _- _ _">
+                            <input id="phone-input" class="form__input" name="phone" type="tel" value="{{ app.request.request.get('phone') }}" placeholder="+7 (_ _ _) _ _ _ -_ _- _ _">
                         </label>
                         <label class="form__label">E-mail: </label>
                         <label class="form__custom-border">
-                            <input class="form__input" type="email" name="email" placeholder="Введите электронный адрес">
+                            <input class="form__input" type="email" name="email" value="{{ app.request.request.get('email') }}" placeholder="Введите электронный адрес">
                         </label>
                         <label class="form__label">Виды работ:</label>
                         <label class="form__custom-border">
@@ -212,7 +213,7 @@
                         <input class="form__file-input form__file-input_hidden-sm" type="file" name="photo[]" accept=".jpg, .png, .bmp, .jpeg, .gif">
                         <label class="form__label">Описание проблемы: </label>
                         <label class="form__custom-border form__custom-border_fixed-height">
-                            <textarea class="form__textarea" maxlength="500" name="description" placeholder="Нужно свалить сосну высотой с двухэтажный дом."></textarea>
+                            <textarea class="form__textarea" maxlength="500" name="description" placeholder="Нужно свалить сосну высотой с двухэтажный дом.">{{ app.request.request.get('description') }}</textarea>
                         </label>
                     </div>
                 </div>

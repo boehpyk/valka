@@ -225,7 +225,7 @@
                 </a>
             </div>
             <nav id="nav" class="nav">
-                <a href="{% if global.debug %}/index_dev.php{% endif %}" class="nav__item link-default to-main">Главная</a>
+                <a href="{% if global.debug %}/index_dev.php{% endif %}/" class="nav__item link-default to-main">Главная</a>
                 {% for menuitem in mainmenu %}
                 <a href="{% if global.debug %}/index_dev.php{% endif %}{{ menuitem.url }}" class="nav__item link-default{% if menuitem.id == article.id or menuitem.id == article.root_id %} active{% endif %}">{{ menuitem.title }}</a>
                 {% endfor %}

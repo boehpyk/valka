@@ -2769,11 +2769,25 @@ h3 {
         .work__txt:before {
           display: none; } }
 
-.right-col-gallery .gallery-item {
-  width: calc(33.33% - 20px);
-  height: auto;
-  float: left;
-  margin: 0 20px 20px 0; }
+.right-col-gallery {
+  width: 100%; }
+  .right-col-gallery .gallery-item {
+    height: auto; }
+    @media (max-width: 991.98px) {
+      .right-col-gallery .gallery-item {
+        float: none;
+        width: 100%;
+        margin: 0 0 20px 0; } }
+    @media (min-width: 768px) {
+      .right-col-gallery .gallery-item {
+        float: left;
+        width: calc(50% - 20px);
+        margin: 0 20px 20px 0; } }
+    @media (min-width: 992px) {
+      .right-col-gallery .gallery-item {
+        float: left;
+        width: calc(33.33% - 20px);
+        margin: 0 20px 20px 0; } }
 
 .feedback__item {
   margin: 0 0 20px 0; }

@@ -51,85 +51,6 @@
         </div>
     </div>
 
-    <div class="panel panel-default">
-        <div class="panel-heading">Событий на главной странице</div>
-        <div class="panel-body">
-            <select name="events_num" id='events_num' class="form-control">
-                <option value="0"{% if article.events_num == 0 %} selected{% endif %}>0</option>
-                <option value="2"{% if article.events_num == 2 %} selected{% endif %}>2</option>
-                <option value="4"{% if article.events_num == 4 %} selected{% endif %}>4</option>
-                <option value="6"{% if article.events_num == 6 %} selected{% endif %}>6</option>
-                <option value="8"{% if article.events_num == 8 %} selected{% endif %}>7</option>
-                <option value="10"{% if article.events_num == 10 %} selected{% endif %}>10</option>
-                <option value="12"{% if article.events_num == 12 %} selected{% endif %}>12</option>
-            </select>
-
-        </div>
-    </div>
-    <div class="panel panel-default">
-        <div class="panel-heading">"К сведению"</div>
-        <div class="panel-body">
-
-            <textarea name="nb" id='nb' class="mceEditor form-control" type="textarea"  style="width:100%; height:50px">
-                {{ article.nb }}
-            </textarea>
-
-        </div>
-    </div>
-
-    <div class="panel panel-default">
-        <div class="panel-heading"><a href="javascript:;" data-toggle="collapse" data-target="#cites" class="toggle-block" data-params="params">Цитаты <span class="caret-right" id="paramsCaret"></span></a></div>
-        <div class="panel-body collapse" id="cites">
-
-            <table class="subdeps table" id="cites_table">
-                {% for cite in cites %}
-                <tr>
-                    <td><textarea name="cite_text[{{ cite.id }}]" class="form-control input-sm">{{ cite.text }}</textarea></td>
-                    <td><input value="yes" name="delete_cite[{{ cite.id }}]" type="checkbox" class="subdep-manage" class="subdep-manage" data-role="delete" /></td>
-                    <input type="hidden" name="exists[{{ cite.id }}]" value="yes" />
-                </tr>
-                {% endfor %}
-            </table>
-            <button class="btn btn-default add-row">+</button>
-        </div>
-    </div>
-
-    <div class="panel panel-default">
-        <div class="panel-heading"><a href="javascript:;" data-toggle="collapse" data-target="#announce" class="toggle-block" data-params="params">Объявление <span class="caret-right" id="paramsCaret"></span></a></div>
-        <div class="panel-body collapse" id="announce">
-            <table class="text-parts-table table table-bordered">
-                <tr>
-                    <td class="active">Ссылка с кнопки "Смотреть дальше"</td>
-                    <td>
-                        <input type="text" name='announce_link' class="form-control" value="{{ article.announce_link }}" />
-                    </td>
-                </tr>
-                <tr>
-                    <td class="active">Изображение (PNG, 630x200)</td>
-                    <td>
-                        <div style="background: #fafafa;">
-                            <img src="/uplds/{{ article.id }}/{{ article.announce_img }}" style="max-height:100px; width: auto;" />
-                        </div>
-                        <input type="file" name="announce_img" />
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
-
-
-    <div class="panel panel-default">
-        <div class="panel-heading">Текст</div>
-        <div class="panel-body">
-
-            <textarea name="main_text" id='main_text' class="mceEditor form-control" type="textarea"  style="width:100%; height:350px">
-                {{ article.main_text }}
-            </textarea>
-
-        </div>
-    </div>
-
-
     <input type="hidden" name="article_id" id='article_id' value="{{ article.id }}" />
     <input type="hidden" name="global_title" id='global_title' value="" />
     <input type="hidden" name="parent_id" id='parent_id' value="{{ article.parent_id }}" />
@@ -138,18 +59,3 @@
     <input type="hidden" name="Update" value="Update" />
     <button id="submit_btn" class="btn btn-primary" onClick="return ConfirmDelete()">Внести изменения</button>
 </form>
-
-<script>
-    $().ready(function() {
-        $('.add-row').on('click', function (e) {
-            e.preventDefault();
-            $.ajax({
-                url: "/admin/ajax_cite_add_row/"
-            })
-                .done(function( data ) {
-                    $('#cites_table').append(data);
-                });
-        })
-    });
-</script>
-

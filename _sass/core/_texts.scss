@@ -1,10 +1,22 @@
 .right-col-gallery {
-
+  width: 100%;
   .gallery-item {
-    width: calc(33.33% - 20px);
     height: auto;
-    float: left;
-    margin: 0 20px 20px 0;
+    @include media-breakpoint-down(md) {
+      float: none;
+      width: 100%;
+      margin: 0 0 20px 0;
+    }
+    @include media-breakpoint-up(md) {
+      float: left;
+      width: calc(50% - 20px);
+      margin: 0 20px 20px 0;
+    }
+    @include media-breakpoint-up(lg) {
+      float: left;
+      width: calc(33.33% - 20px);
+      margin: 0 20px 20px 0;
+    }
   }
   
 }

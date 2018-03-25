@@ -88,7 +88,7 @@ class FirstPage extends Page
             foreach ($this->errors as $error) {
                 $err_str .= $error.'<br />';
             }
-            $this->app['session']->getFlashBag()->add('message', array('type' => 'danger', 'content' => '<p><b>При заполнениее формы произошли следующие ошибки:</b></p><p>'.$err_str.'</p>'));
+            $this->app['session']->getFlashBag()->add('message', array('type' => 'danger', 'content' => '<p><b>При заполнении формы произошли следующие ошибки:</b></p><p>'.$err_str.'</p>'));
 //            return new RedirectResponse((($this->app['debug']) ? '/index_dev.php' : null) . '/');
         }
     }
@@ -145,8 +145,8 @@ class FirstPage extends Page
         $msg .= 'Имя: '.$name."\n";
         $msg .= 'E-mail: '.$email."\n";
         $msg .= 'Телефон: '.$phone."\n";
-        $msg .= 'Работы: '.$phone."\n";
-        $msg .= "$description\n\n";
+        $msg .= 'Работы: '.$service."\n";
+        $msg .= 'Описание: '.$description."\n\n";
         $msg .= "Дата: " . date("d-m-Y, H:i:s", time()) . "\n";
         mail($to,$subject,$msg,$headers);
 
