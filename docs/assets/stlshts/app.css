@@ -2316,12 +2316,6 @@ h3 {
       color: #fff; }
       .nav__item:hover:after, .nav__item.active:after {
         height: 6px; }
-    @media (min-width: 992px) {
-      .nav__item.to-main {
-        display: none; } }
-    @media (min-width: 992px) {
-      .nav__item.to-main:after {
-        display: none; } }
   .header_position_not-top .nav:not(.nav_opened) {
     visibility: collapse;
     margin-top: -65px;
@@ -2810,6 +2804,10 @@ h3 {
   .feedback__item .feedback__author {
     text-align: right;
     font-style: italic; }
+
+.feedback-form {
+  width: 80%;
+  margin: 0 auto; }
 
 .news {
   width: 100%; }

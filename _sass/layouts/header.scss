@@ -130,14 +130,14 @@
       }
     }
     &.to-main {
-      @include media-breakpoint-up(lg) {
-        display: none;
-      }
-      &:after {
-        @include media-breakpoint-up(lg) {
-          display: none;
-        }
-      }
+      //@include media-breakpoint-up(lg) {
+      //  display: none;
+      //}
+      //&:after {
+      //  @include media-breakpoint-up(lg) {
+      //    display: none;
+      //  }
+      //}
     }
   }
 

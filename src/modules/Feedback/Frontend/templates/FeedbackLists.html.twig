@@ -7,9 +7,6 @@
 
             {{ article.main_text | raw }}
 
-            <h3>Отзывы</h3>
-
-
             <div class="feedback">
                 {% for feedback in feedbacks %}
                     <div class="feedback__item">
@@ -21,8 +18,70 @@
                 {% endfor %}
             </div>
 
+            <div class="form feedback-form">
+
+                <h2 class="title">Напишите свой отзыв:</h2>
+
+                <form method="post" enctype="multipart/form-data">
+                    <div class="row no-gutters">
+                        <div class="form__flex">
+                            <div class="form__item">
+                                <label class="form__label">Ваше имя: </label>
+                                <label class="form__custom-border">
+                                    <input required class="form__input" type="text" name="name" value="{{ app.request.request.get('name') }}" placeholder="Введите имя">
+                                </label>
+                                <label class="form__label">E-mail: </label>
+                                <label class="form__custom-border">
+                                    <input class="form__input" type="email" name="email" value="{{ app.request.request.get('email') }}" placeholder="Введите электронный адрес">
+                                </label>
+                            </div>
+                            <div class="form__item">
+                                <label class="form__label">Ваше сообщение: </label>
+                                <label class="form__custom-border form__custom-border_fixed-height">
+                                    <textarea required class="form__textarea" maxlength="500" name="question">{{ app.request.request.get('question') }}</textarea>
+                                </label>
+                            </div>
+                            <div class="form__item">
+                                <div class="g-recaptcha" data-sitekey="6LfM2GQUAAAAAAutGc1KvBcKbe5oyzLTyZ94Ls6_"></div>
+                            </div>
+                        </div>
+                        <button class="large-button" type="submit" name="Send">Отправить отзыв</button>
+                    </div>
+                </form>
+
+            </div>
+
 
         </div>
     </div>
 </section>
 
+
+
+{# Check if we got a session without creating one #}
+{#{% if app.request.hasPreviousSession %}#}
+    {# Check if we got some flash messages #}
+    {% if app.session.flashbag.peekAll()|length > 0 %}
+        <div id="hidden-content" style="display: none;">
+            {% for message in app.session.getFlashBag.get('message') %}
+                <div class="alert alert-{{ message.type }}" >
+                    {{ message.content | raw }}
+                </div>
+            {% endfor %}
+        </div>
+        <script>
+            $(document).ready(function() {
+                $.fancybox.open({
+                    src  : '#hidden-content',
+                    type : 'inline',
+                    opts : {
+                        afterShow : function( instance, current ) {
+                            console.info( 'done!' );
+                        }
+                    }
+                });
+            });
+        </script>
+
+    {% endif %}
+{#{% endif %}#}

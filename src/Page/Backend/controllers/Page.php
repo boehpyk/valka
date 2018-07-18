@@ -10,7 +10,7 @@ use Util\Util;
 class Page
 {
     protected $contents;
-    protected $forbidden_types = array('Event', 'FirstPage', 'News', 'Event');
+    protected $forbidden_types = array('Event', 'FirstPage', 'News', 'Feedback');
     protected $images_mimetypes = array('image/gif', 'image/jpeg', 'image/pjpeg', 'image/png');
     protected $is_admin = false;
     protected $article_id;

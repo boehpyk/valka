@@ -227,6 +227,7 @@
                 </a>
             </div>
             <nav id="nav" class="nav">
+                {#<a href="{% if global.debug %}/index_dev.php{% endif %}/" class="nav__item link-default to-main">Главная</a>#}
                 {% for menuitem in mainmenu %}
                     <a href="{% if global.debug %}/index_dev.php{% endif %}{{ menuitem.url }}" class="nav__item link-default">{{ menuitem.title }}</a>
                 {% endfor %}
@@ -274,7 +275,7 @@
 
 <script type=text/javascript src="/assets/jvscrpts/header.js"></script>
 <script type=text/javascript src="/assets/jvscrpts/main.js"></script>
-
+<script src='https://www.google.com/recaptcha/api.js'></script>
 
 
 </body>
