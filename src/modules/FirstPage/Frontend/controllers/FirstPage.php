@@ -122,6 +122,10 @@ class FirstPage extends Page
             $this->errors[] = 'Введите значение в поля "E-mail" или "Телефон"';
 
         }
+        if ((!$request->request->has('agree') or $request->request->get('agree') !== 'yes')) {
+            $this->errors[] = 'Необходимо согласиться с Условиями предоставления персональных данных';
+
+        }
         if (count($this->errors) > 0) {
             return false;
         }

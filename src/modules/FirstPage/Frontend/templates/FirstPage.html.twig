@@ -1,3 +1,4 @@
+
 <section class="header-carousel">
     <div class="container-fluid">
 
@@ -215,6 +216,10 @@
                         <label class="form__custom-border form__custom-border_fixed-height">
                             <textarea class="form__textarea" maxlength="500" name="description" placeholder="Нужно свалить сосну высотой с двухэтажный дом.">{{ app.request.request.get('description') }}</textarea>
                         </label>
+                    </div>
+                    <div class="form__item">
+                        <input type="checkbox" class="form__checkbox" id="agree" name="agree" value="yes" checked />
+                        <label for="agree">Я согласен с <a href="/polzovatelskoe_soglashenie/" target="_blank">Условиями обработки персональных данных</a></label>
                     </div>
                 </div>
                 <button class="large-button" type="submit" name="Send">РАССЧИТАТЬ СТОИМОСТЬ</button>
