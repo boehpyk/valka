@@ -13,7 +13,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    width: 301px;
+    width: 270px;
 
     @include media-breakpoint-down(lg) {
       width: 160px;
