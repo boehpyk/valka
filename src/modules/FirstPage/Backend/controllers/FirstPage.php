@@ -18,7 +18,7 @@ class FirstPage extends Page
 
     function __construct(Application $app, $id = null)
     {
-        parent::__construct($app);
+        parent::__construct(4, $app);
 
         $this->article_id = $id;
         $this->app = $app;
