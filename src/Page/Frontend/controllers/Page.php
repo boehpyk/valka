@@ -16,7 +16,7 @@ abstract class Page
     protected $common_links;
     private $root_deps = array();
 
-    function __construct(int $article_id, Application $app)
+    function __construct($article_id, $app)
     {
         $this->app = $app;
         $this->article_id = $article_id;
